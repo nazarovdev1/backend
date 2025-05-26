@@ -1,0 +1,26 @@
+       /* Custom styles for active/inactive tabs */
+        .tab-active {
+            border-bottom-width: 2px;
+            border-color: #4F46E5; /* indigo-600 */
+            color: #4F46E5;
+            font-weight: 600;
+        }
+        .tab-inactive {
+            color: #6B7280; /* gray-500 */
+        }
+        /* Simple transition for form visibility */
+        .form-container {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .form-hidden {
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            position: absolute;
+        }
+        .form-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            position: relative;
+        }
