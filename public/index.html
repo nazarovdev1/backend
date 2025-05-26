@@ -1,588 +1,514 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="assets/images/discover-mobile-350x350-16.png" type="image/x-icon">
-  
-  <title>Computer Service - One page Free Bootstrap template</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css">
-  <link rel="stylesheet" href="assets/animate.css/animate.min.css">
-  <link rel="stylesheet" href="assets/socicon/css/socicon.min.css">
-  <link rel="stylesheet" href="assets/multip/css/style.css">
-  <link rel="stylesheet" href="assets/multip-slider/style.css">
-  <link rel="stylesheet" href="assets/multip-gallery/style.css">
-  <link rel="stylesheet" href="assets/multip/css/mbr-additional.css" type="text/css">
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFixPro - Professional Computer Repair Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-<section class="mbr-navbar mbr-navbar--freeze mbr-navbar--absolute mbr-navbar--transparent mbr-navbar--sticky mbr-navbar--auto-collapse" id="menu-74">
-    <div class="mbr-navbar__section mbr-section">
-        <div class="mbr-section__container container">
-            <div class="mbr-navbar__container">
-                <div class="mbr-navbar__column mbr-navbar__column--m mbr-navbar__brand">
-                    <span class="mbr-navbar__brand-link mbr-brand mbr-brand--inline">
-                        <span class="mbr-brand__logo"><a href=#"><img class="mbr-navbar__brand-img mbr-brand__img" src="assets/images/discover-mobile-350x350-53.png" alt="Comp service"></a></span>
-                        <span class="mbr-brand__name"><a class="mbr-brand__name text-another" href="#">COMPUTER SERVICE</a></span>
-                    </span>
-                </div>
-                <div class="mbr-navbar__hamburger mbr-hamburger text-white"><span class="mbr-hamburger__line"></span></div>
-
-                <div class="mbr-navbar__column mbr-navbar__menu">
-                    <nav class="mbr-navbar__menu-box mbr-navbar__menu-box--inline-right">
-                        <div class="mbr-navbar__column">
-                            <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active">
-                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-another" href="#menu-74">Home</a></li>
-                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-another" href="#features1-75">About us</a></li>
-                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-another" href="#msg-box3-81">Portfolio</a></li>
-                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-another" href="#pricing-table1-86">Pricing</a></li>
-                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-another" href="#testimonials1-88">Testimonials</a></li>
-                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-another" href="#form1-89">Contact</a></li>
-                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-another" href="">Kirish</a></li>
-                            </ul></div>
-                    </nav>
-                </div>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-laptop-code text-2xl"></i>
+                <span class="text-xl font-bold">TechFixPro</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#services" class="hover:text-gray-200 transition">Services</a>
+                <a href="#how-it-works" class="hover:text-gray-200 transition">How It Works</a>
+                <a href="#contact" class="hover:text-gray-200 transition">Contact</a>
+            </div>
+            <button id="chat-togglee" class="bg-white text-purple-700 px-4 py-2 rounded-full font-semibold hover:bg-gray-100 transition flex items-center">
+                 Login \ Signup
+            </button>
+            <button class="md:hidden text-white" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden bg-purple-800" id="mobile-menu">
+            <div class="px-4 py-2 flex flex-col space-y-3">
+                <a href="#services" class="text-white hover:text-gray-200 transition">Services</a>
+                <a href="#how-it-works" class="text-white hover:text-gray-200 transition">How It Works</a>
+                <a href="#contact" class="text-white hover:text-gray-200 transition">Contact</a>
             </div>
         </div>
-    </div>
-</section>
+    </nav>
 
-<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background mbr-after-navbar" id="header1-73" style="background-image: url(assets/images/macbook-926425-1920-1920x1279-92.jpg);">
-    <div class="mbr-box__magnet mbr-box__magnet--sm-padding mbr-box__magnet--center-left">
-        <div class="mbr-overlay" style="opacity: 0.6; background-color: rgb(215, 215, 215);"></div>
-        <div class="mbr-box__container mbr-section__container container">
-            <div class="mbr-box mbr-box--stretched"><div class="mbr-box__magnet mbr-box__magnet--center-left">
-                <div class="row"><div class=" col-sm-6">
-                    <div class="mbr-hero animated fadeInUp">
-                        <h1 class="mbr-hero__text">COMPUTER SERVICE Free Bootstrap Theme</h1>
-                        <p class="mbr-hero__subtext">COMPUTER SERVICE - as its' name says is a multi purpose free bootstrap theme. It can fit any type of business or project. Built with latest frameworks and bootstrap.<br></p>
-                    </div>
-                    <div class="mbr-buttons btn-inverse mbr-buttons--left"><a class="mbr-buttons__btn btn btn-lg animated fadeInUp delay btn-danger" href="#">SUBSCRIBE</a> <a class="mbr-buttons__btn btn btn-lg btn-default animated fadeInUp delay" href="#">LEARN MORE</a></div>
-                </div></div>
-            </div></div>
-        </div>
-        <div class="mbr-arrow mbr-arrow--floating text-center">
-            <div class="mbr-section__container container">
-                <a class="mbr-arrow__link" href="#features1-75"><i class="glyphicon glyphicon-menu-down"></i></a>
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Expert Computer Repair Services</h1>
+                <p class="text-xl mb-8">Fast, reliable, and affordable solutions for all your computer problems. We come to you or you come to us - your choice!</p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#contact" class="bg-white text-purple-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition text-center">Get Help Now</a>
+                    <a href="#services" class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-700 transition text-center">Our Services</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                     alt="Computer repair" class="rounded-lg shadow-2xl max-w-full h-auto">
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="content-2 col-4" id="features1-75" style="background-color: rgb(255, 255, 255);">
-
-    <div class="container">
-        <div class="row">
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-desktop fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>Lorem Ipsum</h3>
-                            <p>Sed egestas urna quam, sit amet euismod ligula commodo vitae. Cras hendrerit quam est, non dapibus turpis porta in. Fusce viverra, lectus vitae dignissim interdum, erat leo egestas velit, eu tincidunt tellus eros a mauris.&nbsp;</p>
-                        </div>
-                        <p class="group"><a href="#" class="btn btn-default">READ MORE</a></p>
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md service-card transition">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-tools text-4xl"></i>
                     </div>
+                    <h3 class="text-xl font-semibold mb-3">Hardware Repair</h3>
+                    <p class="text-gray-600 mb-4">Component replacement, upgrades, and diagnostics for all computer hardware issues.</p>
+                    <ul class="text-gray-600 space-y-2 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> RAM replacement</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Hard drive installation</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Power supply issues</li>
+                    </ul>
                 </div>
-            </div>
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-list fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>Dolor Sit</h3>
-                            <p>Sed egestas urna quam, sit amet euismod ligula commodo vitae. Cras hendrerit quam est, non dapibus turpis porta in. Fusce viverra, lectus vitae dignissim interdum, erat leo egestas velit, eu tincidunt tellus eros a mauris. </p>
-                        </div>
-                        <p class="group"><a href="#" class="btn btn-default">READ MORE</a></p>
+                
+                <!-- Service 2 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md service-card transition">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-desktop text-4xl"></i>
                     </div>
+                    <h3 class="text-xl font-semibold mb-3">Software Solutions</h3>
+                    <p class="text-gray-600 mb-4">Operating system installation, virus removal, and software troubleshooting.</p>
+                    <ul class="text-gray-600 space-y-2 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Windows installation</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Virus/malware removal</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Driver updates</li>
+                    </ul>
                 </div>
-            </div>
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-rocket fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>Amet Bulit</h3>
-                            <p>Sed egestas urna quam, sit amet euismod ligula commodo vitae. Cras hendrerit quam est, non dapibus turpis porta in. Fusce viverra, lectus vitae dignissim interdum, erat leo egestas velit, eu tincidunt tellus eros a mauris. </p>
-                        </div>
-                        <p class="group"><a href="#" class="btn btn-default">READ MORE</a></p>
+                
+                <!-- Service 3 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md service-card transition">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-network-wired text-4xl"></i>
                     </div>
-                </div>
-            </div>
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-picture-o fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>Consteur elit</h3>
-                            <p>Sed egestas urna quam, sit amet euismod ligula commodo vitae. Cras hendrerit quam est, non dapibus turpis porta in. Fusce viverra, lectus vitae dignissim interdum, erat leo egestas velit, eu tincidunt tellus eros a mauris. </p>
-                        </div>
-                        <p class="group"><a href="#" class="btn btn-default">READ MORE</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" id="header1-76" style="background-image: url(assets/images/iphone-926663-1920-1920x1280-94.jpg);">
-    <div class="mbr-box__magnet mbr-box__magnet--sm-padding mbr-box__magnet--center-left">
-        <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(215, 215, 215);"></div>
-        <div class="mbr-box__container mbr-section__container container">
-            <div class="mbr-box mbr-box--stretched"><div class="mbr-box__magnet mbr-box__magnet--center-left">
-                <div class="row"><div class=" col-sm-6">
-                    <div class="mbr-hero animated fadeInUp">
-                        <h1 class="mbr-hero__text">Multipurpose in anyway</h1>
-                        <p class="mbr-hero__subtext">COMPUTER SERVICE can be easily transoformed into any kind of business such as online store, personal blog, etc.<br></p>
-                    </div>
-                    <div class="mbr-buttons btn-inverse mbr-buttons--left"><a class="mbr-buttons__btn btn btn-lg animated fadeInUp delay btn-danger" href="#">CHECKOUT</a> <a class="mbr-buttons__btn btn btn-lg btn-default animated fadeInUp delay" href="#">READ MORE</a></div>
-                </div></div>
-            </div></div>
-        </div>
-        <div class="mbr-arrow mbr-arrow--floating text-center">
-            <div class="mbr-section__container container">
-                <a class="mbr-arrow__link" href="#features1-77"><i class="glyphicon glyphicon-menu-down"></i></a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="content-2 col-4" id="features1-77" style="background-color: rgb(239, 239, 239);">
-
-    <div class="container">
-        <div class="row">
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-truck fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>Delivery</h3>
-                            <p>Duis sodales arcu eget gravida mollis. Sed condimentum nibh at dapibus semper. Etiam mattis leo at commodo eleifend. Integer mauris est, luctus vitae lobortis sed, tristique in eros. </p>
-                        </div>
-                        <p class="group"><a href="#" class="btn btn-danger">READ MORE</a></p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-trophy fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>Trophies</h3>
-                            <p>Duis sodales arcu eget gravida mollis. Sed condimentum nibh at dapibus semper. Etiam mattis leo at commodo eleifend. Integer mauris est, luctus vitae lobortis sed, tristique in eros.&nbsp;</p>
-                        </div>
-                        <p class="group"><a href="#" class="btn btn-danger">READ MORE</a></p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-link fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>Outbound links</h3>
-                            <p>Duis sodales arcu eget gravida mollis. Sed condimentum nibh at dapibus semper. Etiam mattis leo at commodo eleifend. Integer mauris est, luctus vitae lobortis sed, tristique in eros. </p>
-                        </div>
-                        <p class="group"><a href="#" class="btn btn-danger">READ MORE</a></p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-phone fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>Phone support</h3>
-                            <p>Duis sodales arcu eget gravida mollis. Sed condimentum nibh at dapibus semper. Etiam mattis leo at commodo eleifend. Integer mauris est, luctus vitae lobortis sed, tristique in eros. </p>
-                        </div>
-                        <p class="group"><a href="#" class="btn btn-danger">READ MORE</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="mbr-section mbr-section--relative mbr-parallax-background" id="msg-box5-79" style="background-image: url(assets/images/iphone-6-458150-1920-1920x1285-73.jpg);">
-    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(57, 82, 89);"></div>
-    <div class="mbr-section__container mbr-section__container--isolated container">
-        <div class="row">
-            <div class="mbr-box mbr-box--fixed mbr-box--adapted">
-                <div class="mbr-box__magnet mbr-box__magnet--top-right mbr-section__left col-sm-6">
-                    <figure class="mbr-figure mbr-figure--adapted mbr-figure--caption-inside-bottom mbr-figure--full-width"><img class="mbr-figure__img" src="assets/images/iphone-1032784-1920-1920x1440-16.jpg"></figure>
-                </div>
-                <div class="mbr-box__magnet mbr-class-mbr-box__magnet--center-left col-sm-6 mbr-section__right">
-                    <div class="mbr-section__container mbr-section__container--middle">
-                        <div class="mbr-header mbr-header--auto-align mbr-header--wysiwyg">
-                            <h3 class="mbr-header__text">ABOUT COMPUTER SERVICE</h3>
-
-                        </div>
-                    </div>
-                    <div class="mbr-section__container mbr-section__container--middle">
-                        <div class="mbr-article mbr-article--auto-align mbr-article--wysiwyg">
-                            <p>
-                                Cras facilisis nulla purus, sed laoreet sapien placerat euismod. Duis eu lectus gravida nisl finibus sodales. Suspendisse dapibus efficitur est fermentum tincidunt. Sed semper faucibus massa, id fermentum quam luctus placerat. Cras at tellus id odio euismod laoreet. Vivamus ac blandit justo.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mbr-section__container">
-                        <div class="mbr-buttons mbr-buttons--auto-align btn-inverse"><a class="mbr-buttons__btn btn btn-lg btn-default" href="#">LEARN MORE</a></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="content-2 col-3" id="features1-80" style="background-color: rgb(239, 239, 239);">
-
-    <div class="container">
-        <div class="row">
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-automobile fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>EASY TO USE</h3>
-                            <p>Sed vel vulputate lacus. Nulla et fringilla turpis. Etiam non urna magna. Fusce rutrum nec eros id dapibus. In tincidunt mi eget molestie condimentum.</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-headphones fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>24/7 Support</h3>
-                            <p>Sed vel vulputate lacus. Nulla et fringilla turpis. Etiam non urna magna. Fusce rutrum nec eros id dapibus. In tincidunt mi eget molestie condimentum.</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="thumbnail">
-                    <div class="image"><i class="fa fa-usd fa-5x" style="color:#43c0ff;"></i></div>
-                    <div class="caption">
-                        <div>
-                            <h3>Extremely low price</h3>
-                            <p>Sed vel vulputate lacus. Nulla et fringilla turpis. Etiam non urna magna. Fusce rutrum nec eros id dapibus. In tincidunt mi eget molestie condimentum.</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="msg-box3-81" style="background-color: rgb(255, 255, 255);">
-
-    <div class="mbr-section__container container mbr-section__container--isolated">
-        <div class="mbr-header mbr-header--wysiwyg row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <h3 class="mbr-header__text">OUR PORTFOLIO</h3>
-            </div>
-        </div>
-    </div>
-
-
-</section>
-
-<section class="mbr-gallery mbr-section mbr-section--no-padding" id="gallery1-82" style="background-color: rgb(239, 239, 239);">
-    <!-- Gallery -->
-    <div class=" mbr-gallery-layout-default">
-        <div>
-            <div class="row mbr-gallery-row no-gutter">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item">
-                    <a href="#lb-gallery1-82" data-slide-to="0" data-toggle="modal">
-                        <img alt="" src="assets/images/iphone-1067975-1920-1920x1439-11-1920x1439-53.jpg">
-                        <span class="icon fa fa-search-plus"></span>
-                    </a>
-                </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item">
-                    <a href="#lb-gallery1-82" data-slide-to="1" data-toggle="modal">
-                        <img alt="" src="assets/images/iphone-1067982-1920-1920x1439-68-1920x1439-47.jpg">
-                        <span class="icon fa fa-search-plus"></span>
-                    </a>
-                </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item">
-                    <a href="#lb-gallery1-82" data-slide-to="2" data-toggle="modal">
-                        <img alt="" src="assets/images/iphone-1067983-1920-1920x1440-44-1920x1440-62.jpg">
-                        <span class="icon fa fa-search-plus"></span>
-                    </a>
-                </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item">
-                    <a href="#lb-gallery1-82" data-slide-to="3" data-toggle="modal">
-                        <img alt="" src="assets/images/iphone-1067991-1920-1920x1440-57-1920x1440-37.jpg">
-                        <span class="icon fa fa-search-plus"></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <!-- Lightbox -->
-    <div data-app-prevent-settings="" class="mbr-slider modal fade carousel slide" tabindex="-1" data-keyboard="true" data-interval="false" id="lb-gallery1-82">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <ol class="carousel-indicators">
-                        <li data-app-prevent-settings="" data-target="#lb-gallery1-82" data-slide-to="0"></li><li data-app-prevent-settings="" data-target="#lb-gallery1-82" data-slide-to="1"></li><li data-app-prevent-settings="" data-target="#lb-gallery1-82" data-slide-to="2"></li><li data-app-prevent-settings="" data-target="#lb-gallery1-82" class=" active" data-slide-to="3"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="item">
-                            <img alt="" src="assets/images/iphone-1067975-1920-1920x1439-11.jpg">
-                        </div><div class="item">
-                            <img alt="" src="assets/images/iphone-1067982-1920-1920x1439-68.jpg">
-                        </div><div class="item">
-                            <img alt="" src="assets/images/iphone-1067983-1920-1920x1440-44.jpg">
-                        </div><div class="item active">
-                            <img alt="" src="assets/images/iphone-1067991-1920-1920x1440-57.jpg">
-                        </div>
-                    </div>
-                    <a class="left carousel-control" role="button" data-slide="prev" href="#lb-gallery1-82">
-                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" role="button" data-slide="next" href="#lb-gallery1-82">
-                        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-
-                    <a class="close" href="#" role="button" data-dismiss="modal">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        <span class="sr-only">Close</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="social-buttons2-84" style="background-color: rgb(240, 240, 240);">
-
-
-    <div class="mbr-section__container container">
-        <div class="mbr-header mbr-header--inline row">
-            <div class="col-sm-4">
-                <h3 class="mbr-header__text">SOCIAL NETWORKS</h3>
-            </div>
-            <div class="mbr-social-icons mbr-social-icons--style-1 col-sm-8"><a class="mbr-social-icons__icon socicon-bg-twitter" title="Twitter" target="_blank" href="https://twitter.com/"><i class="socicon socicon-twitter"></i></a> <a class="mbr-social-icons__icon socicon-bg-facebook" title="Facebook" target="_blank" href="https://www.facebook.com/pages/"><i class="socicon socicon-facebook"></i></a> <a class="mbr-social-icons__icon socicon-bg-google" title="Google+" target="_blank" href="https://plus.google.com/u/0/"><i class="socicon socicon-google"></i></a> <a class="mbr-social-icons__icon socicon-bg-youtube" title="YouTube" target="_blank" href="http://www.youtube.com/channel/UCt_tncVAetpK5JeM8L-8jyw"><i class="socicon socicon-youtube"></i></a> <a class="mbr-social-icons__icon socicon-bg-instagram" title="Instagram" target="_blank" href="https://instagram.com/"><i class="socicon socicon-instagram"></i></a> <a class="mbr-social-icons__icon socicon-bg-pinterest" title="Pinterest" target="_blank" href="https://www.pinterest.com/"><i class="socicon socicon-pinterest"></i></a>  <a class="mbr-social-icons__icon socicon-bg-behance" title="Behance" target="_blank" href="https://www.behance.net/"><i class="socicon socicon-behance"></i></a> <a class="mbr-social-icons__icon socicon-bg-tumblr" title="Tumblr" target="_blank" href="http://.tumblr.com/"><i class="socicon socicon-tumblr"></i></a> <a class="mbr-social-icons__icon socicon-bg-linkedin" title="LinkedIn" target="_blank" href="https://www.linkedin.com/in/"><i class="socicon socicon-linkedin"></i></a> <a class="mbr-social-icons__icon socicon-bg-android" title="Google Play" target="_blank" href="https://play.google.com/store/apps/details?id=com."><i class="socicon socicon-android"></i></a></div>
-        </div>
-    </div>
-</section>
-
-
-<section class="pricing-table-1 col-4" id="pricing-table1-86" style="background-color: rgb(243, 243, 243);">
-
-
-    <div class="container">
-        <div class="row">
-            <div>
-                <div class="plan orange">
-                    <h3>STANDARD</h3>
-                    <p class="price">
-                        <strong><sup>$</sup><span>10</span></strong>
-                        <small>per month</small>
-                    </p>
-                    <div><ul><li><strong>32 GB</strong> Storage</li><li><strong>Unlimited</strong> Users</li><li><strong>15 GB</strong> Bandwidth</li></ul></div>
-                    <p><a href="#" class="btn btn-danger">ORDER</a></p>
-                </div>
-            </div>
-            <div>
-                <div class="plan orange">
-                    <h3>BUSINESS</h3>
-                    <p class="price">
-                        <strong><sup>$</sup><span>20</span></strong>
-                        <small>per month</small>
-                    </p>
-                    <div><ul><li><strong>80 GB</strong> Storage</li><li><strong>Unlimited</strong> Users</li><li><strong>20 GB</strong> Bandwidth</li></ul></div>
-                    <p><a href="#" class="btn btn-danger">ORDER</a></p>
-                </div>
-            </div>
-            <div>
-                <div class="plan orange">
-                    <h3>PREMIUM</h3>
-                    <p class="price">
-                        <strong><sup>$</sup><span>30</span></strong>
-                        <small>per month</small>
-                    </p>
-                    <div><ul><li><strong>100 GB</strong> Storage</li><li><strong>Unlimited</strong> Users</li><li><strong>50 GB</strong> Bandwidth</li></ul></div>
-                    <p><a href="#" class="btn btn-danger">ORDER</a></p>
-                </div>
-            </div>
-            <div>
-                <div class="plan favorite">
-                    <h3>ULTIMATE</h3>
-                    <p class="price">
-                        <strong><sup>$</sup><span>50</span></strong>
-                        <small>per month</small>
-                    </p>
-                    <div><ul><li><strong>Unlimited</strong> Storage</li><li><strong>Unlimited</strong> Users</li><li><strong>1TB GB</strong> Bandwidth</li></ul></div>
-                    <p><a href="#" class="btn btn-danger">ORDER</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="social-buttons1-87" style="background-color: #43c0ff;">
-
-
-    <div class="mbr-section__container container">
-        <div class="mbr-header mbr-header--inline row">
-            <div class="col-sm-4">
-                <h3 class="mbr-header__text">SHARE THIS PAGE!</h3>
-            </div>
-            <div class="mbr-social-icons col-sm-8">
-                <div class="mbr-social-likes social-likes_style-1" data-counters="true">
-                    <div class="mbr-social-icons__icon social-likes__icon facebook socicon-bg-facebook" title="Share link on Facebook">
-                        <i class="socicon socicon-facebook"></i>
-
-                    </div>
-                    <div class="mbr-social-icons__icon social-likes__icon twitter socicon-bg-twitter" title="Share link on Twitter">
-                        <i class="socicon socicon-twitter"></i>
-
-                    </div>
-                    <div class="mbr-social-icons__icon social-likes__icon plusone socicon-bg-google" title="Share link on Google+">
-                        <i class="socicon socicon-google"></i>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="testimonials1-88" style="background-color: rgb(255, 255, 255);">
-    <div>
-
-        <div class="mbr-section__container mbr-section__container--std-padding container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2 class="mbr-section__header">TESTIMONIALS FROM OUR USERS</h2>
-                    <ul class="mbr-reviews mbr-reviews--wysiwyg row">
-                        <li class="mbr-reviews__item col-sm-6 col-md-4">
-                            <div class="mbr-reviews__text"><p class="mbr-reviews__p">“Nullam cursus sed nibh nec commodo. Ut mattis mi at magna vestibulum, vel mattis dolor vulputate. Vestibulum egestas libero sit amet nisi feugiat, id molestie quam cursus. ”</p></div>
-                            <div class="mbr-reviews__author mbr-reviews__author--short">
-                                <div class="mbr-reviews__author-name">NANCY</div>
-                                <div class="mbr-reviews__author-bio">User</div>
-                            </div>
-                        </li><li class="mbr-reviews__item col-sm-6 col-md-4">
-                            <div class="mbr-reviews__text"><p class="mbr-reviews__p">“Curabitur dignissim tempus libero at aliquam. Sed arcu nisi, maximus sit amet nulla quis, faucibus sollicitudin lacus. Quisque sed nulla at leo cursus finibus sed hendrerit risus. Maecenas euismod faucibus ornare. Sed tellus elit, fringilla in malesuada nec, volutpat vel ligula.”</p></div>
-                            <div class="mbr-reviews__author mbr-reviews__author--short">
-                                <div class="mbr-reviews__author-name">JOHN</div>
-                                <div class="mbr-reviews__author-bio">User</div>
-                            </div>
-                        </li><li class="mbr-reviews__item col-sm-6 col-md-4">
-                            <div class="mbr-reviews__text"><p class="mbr-reviews__p">“In tempus arcu a urna maximus, at porta felis laoreet. Vestibulum dui ipsum, varius ac ante sed, volutpat faucibus mauris. Morbi viverra ipsum ut lacinia pretium. Vivamus sit amet quam sed lorem rhoncus gravida. ”</p></div>
-                            <div class="mbr-reviews__author mbr-reviews__author--short">
-                                <div class="mbr-reviews__author-name">MARK</div>
-                                <div class="mbr-reviews__author-bio">User</div>
-                            </div>
-                        </li>
+                    <h3 class="text-xl font-semibold mb-3">Network Support</h3>
+                    <p class="text-gray-600 mb-4">Internet connectivity issues, WiFi setup, and network configuration.</p>
+                    <ul class="text-gray-600 space-y-2 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Router setup</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Connection troubleshooting</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Network security</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="form1-89" style="background-color: rgb(239, 239, 239);">
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">How Our Service Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-purple-700 text-2xl font-bold">1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Contact Us</h3>
+                    <p class="text-gray-600">Call our support center or use our live chat to describe your problem.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-purple-700 text-2xl font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Choose Solution</h3>
+                    <p class="text-gray-600">We'll provide options: remote help, on-site visit, or drop-off service.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-purple-700 text-2xl font-bold">3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Get Fixed & Pay</h3>
+                    <p class="text-gray-600">After the problem is solved, you make payment for the service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="mbr-section__container mbr-section__container--std-padding container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2" data-form-type="formoid">
-                        <div class="mbr-header mbr-header--center mbr-header--std-padding">
-                            <h2 class="mbr-header__text">CONTACT FORM</h2>
+    <!-- Call Center Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Call center" class="rounded-lg shadow-xl max-w-full h-auto">
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">24/7 Call Center Support</h2>
+                    <p class="text-gray-600 mb-6">Our professional support team is available around the clock to help with your computer problems. Whether it's internet connectivity issues, software problems, or hardware malfunctions, we're here to help.</p>
+                    <div class="bg-purple-50 p-6 rounded-lg mb-6">
+                        <h3 class="text-xl font-semibold mb-3 text-purple-700">How it works:</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Call our support number or use live chat</li>
+                            <li>Describe your problem to our technician</li>
+                            <li>If we can solve it remotely, we'll guide you through</li>
+                            <li>If not, we'll arrange an on-site visit or other solution</li>
+                            <li>Payment is only required after the problem is fixed</li>
+                        </ol>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone-volume text-3xl text-purple-600 mr-4"></i>
+                        <div>
+                            <p class="text-gray-500">Call us anytime</p>
+                            <a href="tel:+1234567890" class="text-2xl font-bold text-gray-800 hover:text-purple-600 transition">+1 (234) 567-890</a>
                         </div>
-                        <div data-form-alert="true"></div>
-                        <form action="#" method="post" data-form-title="CONTACT FORM">
-                            <input type="hidden" value="" data-form-email="true">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="name" required="" placeholder="Name*" data-form-field="Name">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Support Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Live Chat Support</h2>
+                    <p class="text-gray-600 mb-6">Can't get through on the phone? Our live chat support is available 24/7 to help with your computer issues. Describe your problem and we'll provide solutions.</p>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                        <h3 class="text-xl font-semibold mb-3 text-purple-700">When phone support isn't available:</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Use our live chat to describe your problem</li>
+                            <li>Our technicians will respond with solutions</li>
+                            <li>If remote help isn't possible, we'll provide options</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-3 text-purple-700">Delivery Options:</h3>
+                        <p class="text-gray-700 mb-3">For computers that can't be fixed remotely, choose from:</p>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-car text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">1. Drop-off Service</h4>
+                                    <p class="text-gray-600 text-sm">Bring your computer to our service center</p>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="email" required="" placeholder="Email*" data-form-field="Email">
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-user-cog text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">2. On-site Technician</h4>
+                                    <p class="text-gray-600 text-sm">We'll send a technician to your location</p>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="tel" class="form-control" name="phone" placeholder="Phone" data-form-field="Phone">
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-truck text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">3. Pickup & Delivery</h4>
+                                    <p class="text-gray-600 text-sm">We'll pick up and return your computer</p>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="message" placeholder="Message" rows="7" data-form-field="Message"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+                        <div class="bg-purple-600 text-white p-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-purple-400 flex items-center justify-center mr-3">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold">TechFixPro Support</h3>
+                                    <p class="text-xs text-purple-200">Online now</p>
+                                </div>
                             </div>
-                            <div class="mbr-buttons mbr-buttons--right"><button type="submit" class="mbr-buttons__btn btn btn-lg btn-danger">CONTACT US</button></div>
+                        </div>
+                        <div class="p-4 h-96 overflow-y-auto" id="chat-demo">
+                            <div class="flex mb-4">
+                                <div class="bg-gray-100 p-3 rounded-lg chat-message">
+                                    <p>Hello! Welcome to TechFixPro support. How can we help you today?</p>
+                                </div>
+                            </div>
+                            <div class="flex mb-4 justify-end">
+                                <div class="bg-purple-100 p-3 rounded-lg chat-message">
+                                    <p>Hi, my computer won't connect to the internet.</p>
+                                </div>
+                            </div>
+                            <div class="flex mb-4">
+                                <div class="bg-gray-100 p-3 rounded-lg chat-message">
+                                    <p>I'm sorry to hear that. Let's try some troubleshooting steps. First, could you tell me if other devices in your home can connect to the internet?</p>
+                                </div>
+                            </div>
+                            <div class="flex mb-4 justify-end">
+                                <div class="bg-purple-100 p-3 rounded-lg chat-message">
+                                    <p>Yes, my phone is connected fine.</p>
+                                </div>
+                            </div>
+                            <div class="flex mb-4">
+                                <div class="bg-gray-100 p-3 rounded-lg chat-message">
+                                    <p>Thanks. Let's try resetting your network adapter. Press Windows key + X and select "Device Manager". Can you find "Network adapters" in the list?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t">
+                            <div class="flex">
+                                <input type="text" placeholder="Type your message..." class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <button class="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 transition">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Support Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Business IT Support</h2>
+                    <p class="text-gray-600 mb-6">For businesses with multiple computer issues, we provide dedicated on-site technicians to resolve all your IT problems efficiently.</p>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm mb-6">
+                        <h3 class="text-xl font-semibold mb-3 text-purple-700">Our Business Support Includes:</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>On-site technician dispatched to your location</li>
+                            <li>Diagnosis and repair of all affected computers</li>
+                            <li>Network troubleshooting and setup</li>
+                            <li>Preventive maintenance recommendations</li>
+                            <li>Bulk discounts for multiple repairs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <i class="fas fa-briefcase text-3xl text-purple-600 mr-4"></i>
+                        <div>
+                            <p class="text-gray-500">Business inquiries</p>
+                            <a href="mailto:business@techfixpro.com" class="text-xl font-semibold text-gray-800 hover:text-purple-600 transition">business@techfixpro.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Business support" class="rounded-lg shadow-xl max-w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">Simple Payment Process</h2>
+            <p class="text-gray-600 max-w-3xl mx-auto mb-10">We believe in fair pricing and only charge after your computer problem is completely resolved. No upfront payments required.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Payment Step 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-search-dollar text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Diagnosis</h3>
+                    <p class="text-gray-600">We diagnose the problem and provide a cost estimate before any work begins.</p>
+                </div>
+                
+                <!-- Payment Step 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Repair</h3>
+                    <p class="text-gray-600">Our technicians fix the issue while keeping you informed throughout the process.</p>
+                </div>
+                
+                <!-- Payment Step 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-credit-card text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Payment</h3>
+                    <p class="text-gray-600">Only after you confirm the problem is resolved do we process payment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Contact Us</h2>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8">
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Get in Touch</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-map-marker-alt text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Address</h4>
+                                    <p class="text-gray-600">123 Tech Street, Silicon Valley, CA 94000</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-phone-alt text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Phone</h4>
+                                    <p class="text-gray-600">+1 (234) 567-890 (24/7 Support)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-envelope text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Email</h4>
+                                    <p class="text-gray-600">support@techfixpro.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Send Us a Message</h3>
+                        <form>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700 mb-2">Describe Your Problem</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+                            </div>
+                            <button type="submit" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition w-full">
+                                Send Message
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Floating Chat Button -->
+    <div id="floating-chat" class="fixed bottom-8 right-8 hidden">
+        <button class="bg-purple-600 text-white w-16 h-16 rounded-full shadow-xl flex items-center justify-center floating-button hover:bg-purple-700 transition">
+            <i class="fas fa-comment-dots text-2xl"></i>
+        </button>
     </div>
-</section>
 
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts2-90" style="background-color: rgb(60, 60, 60);">
-
-    <div class="mbr-section__container container">
-        <div class="mbr-contacts mbr-contacts--wysiwyg row">
-            <div class="col-sm-6">
-                <figure class="mbr-figure mbr-figure--wysiwyg mbr-figure--full-width mbr-figure--no-bg">
-                    <div class="mbr-figure__map mbr-figure__map--short mbr-google-map">
-                        <p class="mbr-google-map__marker" data-coordinates="42.748384,-6.9854792"></p>
-                    </div>
-                </figure>
+    <!-- Chat Popup -->
+    <div id="chat-popup" class="fixed bottom-0 right-0 w-full md:w-96 bg-white shadow-xl rounded-t-lg hidden">
+        <div class="bg-purple-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-purple-400 flex items-center justify-center mr-3">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div>
+                    <h3 class="font-semibold">TechFixPro Support</h3>
+                    <p class="text-xs text-purple-200">Online now</p>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-sm-5 col-sm-offset-1">
-                        <p class="mbr-contacts__text"><strong>ADDRESS</strong><br>
-1234 Elm Street<br>
-LA, GE 00000<br><br>
-<strong>CONTACT</strong><br>
-Email: support@yourdomain.com<br>
-Phone: +1 (0) 123 1234 001<br>
-Fax: +1 (0) 123 4567 002</p>
-                    </div>
+            <button id="close-chat" class="text-white hover:text-purple-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-container p-4 overflow-y-auto">
+            <div class="flex mb-4">
+                <div class="bg-gray-100 p-3 rounded-lg chat-message">
+                    <p>Hello! Welcome to TechFixPro support. How can we help you today?</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<footer class="mbr-section mbr-section--relative mbr-section--fixed-size" id="footer1-91" style="background-color: rgb(68, 68, 68);">
-
-    <div class="mbr-section__container container">
-        <div class="mbr-footer mbr-footer--wysiwyg row">
-            <div class="col-sm-12">
-                <p class="mbr-footer__copyright"></p><p>Copyright &copy 2018 <a href="https://gridgum.com/themes/category/computer-repair/" target="_blank">Computer Repair Templates</a></p><p></p>
+        <div class="p-4 border-t">
+            <div class="flex">
+                <input type="text" placeholder="Type your message..." class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <button class="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 transition">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
             </div>
         </div>
     </div>
-</footer>
 
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">TechFixPro</h3>
+                    <p class="text-purple-200">Professional computer repair services with a satisfaction guarantee.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-purple-200 hover:text-white transition">Hardware Repair</a></li>
+                        <li><a href="#" class="text-purple-200 hover:text-white transition">Software Solutions</a></li>
+                        <li><a href="#" class="text-purple-200 hover:text-white transition">Network Support</a></li>
+                        <li><a href="#" class="text-purple-200 hover:text-white transition">Business IT</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-purple-200 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="text-purple-200 hover:text-white transition">Our Team</a></li>
+                        <li><a href="#" class="text-purple-200 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="#" class="text-purple-200 hover:text-white transition">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-purple-200 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-purple-200 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-purple-200 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-purple-200 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="text-purple-200">Subscribe to our newsletter</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Your email" class="flex-grow px-3 py-2 rounded-l-lg text-gray-800 focus:outline-none">
+                        <button class="bg-white text-purple-700 px-3 py-2 rounded-r-lg font-semibold hover:bg-gray-100 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-purple-400 mt-8 pt-8 text-center text-purple-200">
+                <p>&copy; 2023 TechFixPro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  <script src="assets/jquery/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
-  <script src="assets/smooth-scroll/SmoothScroll.js"></script>
-  <script src="assets/jarallax/jarallax.js"></script>
-  <script src="assets/bootstrap-carousel-swipe/bootstrap-carousel-swipe.js"></script>
-  <script src="assets/masonry/masonry.pkgd.min.js"></script>
-  <script src="assets/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/social-likes/social-likes.js"></script>
-  <script src="assets/multip/js/script.js"></script>
-  <script src="assets/multip-gallery/script.js"></script>
-  
-  
+    <script src="script.js"></script>
 </body>
 </html>
