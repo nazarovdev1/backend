@@ -6,24 +6,19 @@
     "fullName": "asd"
   },
   {
-    "id": "1a12f1c8-8a9c-4b2d-9e56-7bacc953ee5f",
+    "id": "1d59bc6e-7dbc-49d5-b5d2-a0910d945621",
     "username": "dsa@gmail.com",
     "password": "asdasdasd",
     "fullName": "asddsa",
-    "role": "admin"
+    "role": "user",
+    "createdAt": "2025-05-27T08:25:44.885Z"
   },
   {
-    "id": "c9891d38-f028-47fe-b83c-cce62cc2eb9e",
-    "username": "asda@gmail.com",
+    "id": "267560df-b9b9-4d11-99b8-3b860af22714",
+    "username": "asdasdasd@gmail.com",
     "password": "asdasdasd",
-    "fullName": "asd",
-    "role": "admin"
-  },
-  {
-    "id": "28bc1e47-7d99-475d-a100-e45e469c064e",
-    "username": "dsad@gmail.com",
-    "password": "asdasdasd",
-    "fullName": "asddsadd",
-    "role": "admin"
+    "fullName": "asdasd",
+    "role": "admin",
+    "createdAt": "2025-05-27T08:26:23.553Z"
   }
 ]

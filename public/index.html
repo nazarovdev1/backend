@@ -433,36 +433,42 @@
                     <div class="bg-gray-50 p-8 rounded-xl shadow-sm">
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">Send Us a Message</h3>
                         <form id="contactForm">
-                            <div class="mb-4">
-                                <label for="contactName" class="block text-gray-700 mb-2">Your Name</label>
-                                <input type="text" id="contactName" name="name"
-                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                                    required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="contactEmail" class="block text-gray-700 mb-2">Email Address</label>
-                                <input type="email" id="contactEmail" name="email"
-                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                                    required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="contactPhone" class="block text-gray-700 mb-2">Phone Number</label>
-                                <input type="tel" id="contactPhone" name="phone"
-                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                            </div>
-                            <div class="mb-4">
-                                <label for="contactMessage" class="block text-gray-700 mb-2">Describe Your
-                                    Problem</label>
-                                <textarea id="contactMessage" name="message" rows="4"
-                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                                    required></textarea>
-                            </div>
-                            <button type="submit"
-                                class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition w-full">
-                                Send Message
-                            </button>
-                            <p id="contactFormStatus" class="mt-4 text-sm"></p>
-                        </form>
+            <div class="mb-6">
+                <label for="contactName" class="block text-gray-800 text-sm font-medium mb-2">Ismingiz</label>
+                <input type="text" id="contactName" name="name"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-300"
+                    placeholder="To'liq ismingiz" required>
+            </div>
+            <div class="mb-6">
+                <label for="contactEmail" class="block text-gray-800 text-sm font-medium mb-2">Email Manzilingiz</label>
+                <input type="email" id="contactEmail" name="email"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-300"
+                    placeholder="example@mail.com" required>
+            </div>
+            <div class="mb-6">
+                <label for="contactPhone" class="block text-gray-800 text-sm font-medium mb-2">Telefon Raqamingiz (Ixtiyoriy)</label>
+                <input type="tel" id="contactPhone" name="phone"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-300"
+                    placeholder="+998 XX XXX XX XX">
+            </div>
+            <div class="mb-6">
+                <label for="contactSubject" class="block text-gray-800 text-sm font-medium mb-2">Mavzu</label>
+                <input type="text" id="contactSubject" name="subject"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-300"
+                    placeholder="Xabar mavzusi" required>
+            </div>
+            <div class="mb-8">
+                <label for="contactMessage" class="block text-gray-800 text-sm font-medium mb-2">Sizning Muammoingiz</label>
+                <textarea id="contactMessage" name="message" rows="5"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-300"
+                    placeholder="Muammoingizni batafsil yozing..." required></textarea>
+            </div>
+            <button type="submit" id="submitButton"
+                class="w-full bg-purple-600 text-white px-6 py-3.5 rounded-lg font-semibold hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 transition duration-300 ease-in-out">
+                Xabarni Yuborish
+            </button>
+            <p id="contactFormStatus" class="mt-5 text-sm text-center"></p>
+        </form>
                     </div>
                 </div>
             </div>

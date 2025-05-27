@@ -1,223 +1,370 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+const express = require("express")
+const path = require("path")
+const fs = require("fs")
+const { v4: uuidv4 } = require("uuid")
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app = express()
+const PORT = process.env.PORT || 3000
 
-// Middleware to parse JSON bodies
-app.use(express.json());
+const MESSAGES_FILE_PATH = path.join(__dirname, "messages.json")
+const USERS_FILE_PATH = path.join(__dirname, "users.json")
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Middleware
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, "public")))
 
-// --- HTML Serving Routes ---
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// HTML Serving Routes
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"))
+})
 
-app.get('/auth.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'auth.html'));
-});
+app.get("/auth.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "auth.html"))
+})
 
-app.get('/dashboard.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
-});
+app.get("/dashboard.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "dashboard.html"))
+})
 
-// --- API Routes ---
-
-// Endpoint to GET messages
-app.get('/api/messages', (req, res) => {
-    fs.readFile('messages.json', 'utf8', (err, data) => {
-        if (err) {
-            if (err.code === 'ENOENT') {
-                console.log("messages.json topilmadi (GET), bo'sh massiv qaytarilmoqda.");
-                return res.json([]); // Fayl yo'q bo'lsa, bo'sh massiv qaytaring (200 OK)
-            }
-            console.error("messages.json faylini o'qishda xatolik (GET):", err);
-            return res.status(500).json({ message: 'Xabarlarni o‘qishda server xatoligi' });
-        }
-        try {
-            // Agar fayl bo'sh bo'lsa, data bo'sh string bo'ladi, JSON.parse xato beradi.
-            if (!data.trim()) {
-                console.log("messages.json bo'sh (GET), bo'sh massiv qaytarilmoqda.");
-                return res.json([]);
-            }
-            const messages = JSON.parse(data);
-            if (!Array.isArray(messages)) {
-                console.warn("messages.json (GET) ichidagi ma'lumot massiv emas. Bo'sh massiv qaytarilmoqda.");
-                return res.json([]);
-            }
-            res.json(messages);
-        } catch (parseError) {
-            console.error("messages.json (GET) faylini JSON.parse qilishda xatolik:", parseError);
-            res.json([]); // Xatolik bo'lsa ham bo'sh massiv qaytaramiz
-        }
-    });
-});
-
-// Endpoint to POST a new message
-app.post('/api/messages', (req, res) => {
-    const newMessage = req.body; 
-    newMessage.id = uuidv4(); 
-    newMessage.timestamp = new Date().toISOString();
-    newMessage.status = newMessage.status || 'Yangi';
-
-    fs.readFile('messages.json', 'utf8', (err, data) => {
-        let messages = [];
-        if (err && err.code !== 'ENOENT') {
-            console.error("messages.json o'qishda xatolik (POST):", err);
-            return res.status(500).json({ message: 'Xabarlarni o‘qishda server xatoligi' });
-        }
-        
-        if (!err && data && data.trim()) { // Fayl mavjud, xato yo'q va bo'sh emas
-            try {
-                const parsedData = JSON.parse(data);
-                if (Array.isArray(parsedData)) {
-                    messages = parsedData;
-                } else {
-                     console.warn("messages.json (POST) massiv emas. Yangi massivdan boshlanadi.");
-                }
-            } catch (parseErr) {
-                console.error('messages.json (POST) faylini tahlil qilishda xatolik. Yangi massivdan boshlanadi:', parseErr);
-            }
-        }
-        // Agar fayl topilmagan (ENOENT) yoki bo'sh (data.trim() false) yoki parse xatosi bo'lsa, messages = [] bo'lib qoladi
-        
-        messages.push(newMessage);
-        fs.writeFile('messages.json', JSON.stringify(messages, null, 2), (writeErr) => {
-            if (writeErr) {
-                console.error("messages.json ga yozishda xatolik (POST):", writeErr);
-                return res.status(500).json({ message: 'Xabarni saqlashda server xatoligi' });
-            }
-            res.status(201).json(newMessage);
-        });
-    });
-});
-
-// Endpoint for user registration
-app.post('/api/register', (req, res) => {
-    const { username, password, fullName, role } = req.body;
-    if (!username || !password || !fullName || !role) {
-        return res.status(400).json({ message: 'Foydalanuvchi nomi, parol, to‘liq ism va rol talab qilinadi' });
+// Helper functions
+function readJsonFile(filePath, callback) {
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
+      if (err.code === "ENOENT") {
+        console.log(`${filePath} topilmadi, bo'sh massiv qaytariladi.`)
+        return callback(null, [])
+      }
+      console.error(`${filePath} faylini o'qishda xatolik:`, err)
+      return callback(err)
     }
-    if (role !== 'user' && role !== 'admin') {
-        return res.status(400).json({ message: 'Rol qiymati noto\'g\'ri (faqat "user" yoki "admin")' });
+    try {
+      if (!data.trim()) {
+        console.log(`${filePath} bo'sh, bo'sh massiv qaytariladi.`)
+        return callback(null, [])
+      }
+      const jsonData = JSON.parse(data)
+      if (!Array.isArray(jsonData)) {
+        console.warn(`${filePath} ichidagi ma'lumot massiv emas. Bo'sh massiv qaytariladi.`)
+        return callback(null, [])
+      }
+      callback(null, jsonData)
+    } catch (parseError) {
+      console.error(`${filePath} faylini JSON.parse qilishda xatolik:`, parseError)
+      callback(null, [])
+    }
+  })
+}
+
+function writeJsonFile(filePath, data, callback) {
+  fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf8", callback)
+}
+
+// API Endpoints
+
+// GET messages
+app.get("/api/messages", (req, res) => {
+  readJsonFile(MESSAGES_FILE_PATH, (err, messages) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Xabarlarni o'qishda server xatoligi",
+      })
     }
 
-    fs.readFile('users.json', 'utf8', (err, data) => {
-        let users = [];
-        if (err && err.code !== 'ENOENT') {
-            console.error('users.json faylini o‘qishda xatolik:', err);
-            return res.status(500).json({ message: 'Ro‘yxatdan o‘tish paytida server xatoligi (faylni o\'qish)' });
-        }
-        if (!err && data && data.trim()) {
-            try {
-                const parsedUsers = JSON.parse(data);
-                if (Array.isArray(parsedUsers)) {
-                    users = parsedUsers;
-                } else {
-                    console.warn("users.json massiv emas. Yangi massivdan boshlanadi.");
-                }
-            } catch (parseErr) {
-                 console.error('users.json faylini tahlil qilishda xatolik. Yangi massivdan boshlanadi:', parseErr);
-            }
-        }
+    const sortedMessages = messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+    res.json(sortedMessages)
+  })
+})
 
-        if (users.find(user => user.username === username)) {
-            return res.status(409).json({ message: 'Bunday foydalanuvchi nomi allaqachon mavjud' });
-        }
-        const newUser = { id: uuidv4(), username, password, fullName, role };
-        users.push(newUser);
-        fs.writeFile('users.json', JSON.stringify(users, null, 2), (writeErr) => {
-            if (writeErr) {
-                console.error('users.json fayliga yozishda xatolik:', writeErr);
-                return res.status(500).json({ message: 'Ro‘yxatdan o‘tish paytida server xatoligi (faylga yozish)' });
-            }
-            // Javobda fullName va username ham qaytaramiz, chunki auth.js buni ishlatadi
-            res.status(201).json({ message: 'Foydalanuvchi muvaffaqiyatli ro‘yxatdan o‘tdi', userId: newUser.id, username: newUser.username, fullName: newUser.fullName });
-        });
-    });
-});
+// POST new message
+app.post("/api/messages", (req, res) => {
+  const { name, email, phone, subject, message } = req.body
 
-// Endpoint for user login
-app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
-        return res.status(400).json({ message: 'Foydalanuvchi nomi va parol talab qilinadi' });
+  if (!name || !email || !subject || !message) {
+    return res.status(400).json({
+      success: false,
+      message: "Ism, Email, Mavzu va Xabar maydonlari to'ldirilishi shart.",
+    })
+  }
+
+  const newMessage = {
+    id: uuidv4(),
+    name: name.trim(),
+    email: email.trim(),
+    phone: phone ? phone.trim() : "",
+    subject: subject.trim(),
+    message: message.trim(),
+    timestamp: new Date().toISOString(),
+    status: "Yangi",
+  }
+
+  readJsonFile(MESSAGES_FILE_PATH, (err, messages) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Xabarlarni o'qishda server xatoligi",
+      })
     }
-    fs.readFile('users.json', 'utf8', (err, data) => {
-        if (err) {
-            if (err.code === 'ENOENT') {
-                 return res.status(401).json({ message: 'Kirish ma’lumotlari noto‘g‘ri, foydalanuvchilar fayli topilmadi.' });
-            }
-            console.error('users.json faylini o‘qishda xatolik:', err);
-            return res.status(500).json({ message: 'Kirish paytida server xatoligi' });
-        }
-        try {
-            if (!data.trim()) { // Agar users.json bo'sh bo'lsa
-                return res.status(401).json({ message: 'Kirish ma’lumotlari noto‘g‘ri, foydalanuvchilar ro\'yxati bo\'sh.' });
-            }
-            const users = JSON.parse(data);
-            if (!Array.isArray(users)) {
-                console.warn("users.json massiv emas.");
-                return res.status(500).json({ message: "Foydalanuvchi ma'lumotlari formati noto'g'ri."});
-            }
-            const user = users.find(u => u.username === username && u.password === password); // Parolni xeshlash kerak!
-            if (user) {
-                res.status(200).json({ message: 'Muvaffaqiyatli kirildi', userId: user.id, username: user.username, fullName: user.fullName });
-            } else {
-                res.status(401).json({ message: 'Kirish ma’lumotlari noto‘g‘ri' });
-            }
-        } catch (parseError) {
-             console.error("users.json faylini JSON.parse qilishda xatolik (login):", parseError);
-             return res.status(500).json({ message: "Foydalanuvchi ma'lumotlarini qayta ishlashda xatolik."});
-        }
-    });
-});
 
-// --- Server Listen and File Initialization ---
+    messages.push(newMessage)
+
+    writeJsonFile(MESSAGES_FILE_PATH, messages, (writeErr) => {
+      if (writeErr) {
+        console.error("messages.json ga yozishda xatolik:", writeErr)
+        return res.status(500).json({
+          success: false,
+          message: "Xabarni saqlashda server xatoligi",
+        })
+      }
+
+      console.log("Yangi xabar qo'shildi:", newMessage.id)
+      res.status(201).json({
+        success: true,
+        message: "Xabar muvaffaqiyatli yuborildi",
+        data: newMessage,
+      })
+    })
+  })
+})
+
+// Mark message as read
+app.post("/api/messages/:id/read", (req, res) => {
+  const messageId = req.params.id
+
+  readJsonFile(MESSAGES_FILE_PATH, (err, messages) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Xabarlarni o'qishda xatolik",
+      })
+    }
+
+    const messageIndex = messages.findIndex((msg) => msg.id === messageId)
+    if (messageIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        message: "Xabar topilmadi",
+      })
+    }
+
+    messages[messageIndex].status = "O'qilgan"
+
+    writeJsonFile(MESSAGES_FILE_PATH, messages, (writeErr) => {
+      if (writeErr) {
+        return res.status(500).json({
+          success: false,
+          message: "Xabarni yangilashda xatolik",
+        })
+      }
+
+      res.json({
+        success: true,
+        message: "Xabar o'qilgan deb belgilandi",
+        data: messages[messageIndex],
+      })
+    })
+  })
+})
+
+// DELETE message
+app.delete("/api/messages/:id", (req, res) => {
+  const messageId = req.params.id
+
+  readJsonFile(MESSAGES_FILE_PATH, (err, messages) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Xabarlarni o'qishda xatolik",
+      })
+    }
+
+    const filteredMessages = messages.filter((msg) => msg.id !== messageId)
+    if (filteredMessages.length === messages.length) {
+      return res.status(404).json({
+        success: false,
+        message: "O'chirish uchun xabar topilmadi",
+      })
+    }
+
+    writeJsonFile(MESSAGES_FILE_PATH, filteredMessages, (writeErr) => {
+      if (writeErr) {
+        return res.status(500).json({
+          success: false,
+          message: "Xabarni o'chirishda xatolik",
+        })
+      }
+
+      res.json({
+        success: true,
+        message: "Xabar muvaffaqiyatli o'chirildi",
+      })
+    })
+  })
+})
+
+// User registration with role validation
+app.post("/api/register", (req, res) => {
+  const { username, password, fullName, role } = req.body
+
+  if (!username || !password || !fullName || !role) {
+    return res.status(400).json({
+      success: false,
+      message: "Foydalanuvchi nomi, parol, to'liq ism va rol talab qilinadi",
+    })
+  }
+
+  if (role !== "user" && role !== "admin") {
+    return res.status(400).json({
+      success: false,
+      message: 'Rol qiymati noto\'g\'ri (faqat "user" yoki "admin")',
+    })
+  }
+
+  readJsonFile(USERS_FILE_PATH, (err, users) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Ro'yxatdan o'tish paytida server xatoligi",
+      })
+    }
+
+    // Check if username already exists
+    if (users.find((user) => user.username === username)) {
+      return res.status(409).json({
+        success: false,
+        message: "Bunday foydalanuvchi nomi allaqachon mavjud",
+      })
+    }
+
+    const newUser = {
+      id: uuidv4(),
+      username: username.trim(),
+      password: password.trim(),
+      fullName: fullName.trim(),
+      role: role,
+      createdAt: new Date().toISOString(),
+    }
+
+    users.push(newUser)
+
+    writeJsonFile(USERS_FILE_PATH, users, (writeErr) => {
+      if (writeErr) {
+        console.error("users.json fayliga yozishda xatolik:", writeErr)
+        return res.status(500).json({
+          success: false,
+          message: "Ro'yxatdan o'tish paytida server xatoligi",
+        })
+      }
+
+      res.status(201).json({
+        success: true,
+        message: "Foydalanuvchi muvaffaqiyatli ro'yxatdan o'tdi",
+        user: {
+          id: newUser.id,
+          username: newUser.username,
+          fullName: newUser.fullName,
+          role: newUser.role,
+        },
+      })
+    })
+  })
+})
+
+// User login with role validation
+app.post("/api/login", (req, res) => {
+  const { username, password, role } = req.body
+
+  if (!username || !password || !role) {
+    return res.status(400).json({
+      success: false,
+      message: "Foydalanuvchi nomi, parol va rol talab qilinadi",
+    })
+  }
+
+  readJsonFile(USERS_FILE_PATH, (err, users) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Kirish paytida server xatoligi",
+      })
+    }
+
+    // Find user with matching username, password AND role
+    const user = users.find((u) => u.username === username && u.password === password && u.role === role)
+
+    if (user) {
+      res.status(200).json({
+        success: true,
+        message: "Muvaffaqiyatli kirildi",
+        user: {
+          id: user.id,
+          username: user.username,
+          fullName: user.fullName,
+          role: user.role,
+        },
+      })
+    } else {
+      // Check if user exists with different role
+      const userWithDifferentRole = users.find((u) => u.username === username && u.password === password)
+
+      if (userWithDifferentRole) {
+        return res.status(403).json({
+          success: false,
+          message: `Bu hisobga ${userWithDifferentRole.role} sifatida ro'yxatdan o'tgansiz. ${role} sifatida kira olmaysiz.`,
+        })
+      }
+
+      res.status(401).json({
+        success: false,
+        message: "Kirish ma'lumotlari noto'g'ri",
+      })
+    }
+  })
+})
+
+// Initialize JSON files
+function initializeFiles() {
+  ;[MESSAGES_FILE_PATH, USERS_FILE_PATH].forEach((filePath) => {
+    fs.access(filePath, fs.constants.F_OK, (err) => {
+      if (err) {
+        console.log(`${path.basename(filePath)} topilmadi. Bo'sh massiv bilan yangisi yaratiladi.`)
+        writeJsonFile(filePath, [], (initWriteErr) => {
+          if (initWriteErr) {
+            console.error(`${path.basename(filePath)} faylini ishga tushirishda xatolik:`, initWriteErr)
+          } else {
+            console.log(`${path.basename(filePath)} fayli muvaffaqiyatli yaratildi.`)
+          }
+        })
+      } else {
+        fs.readFile(filePath, "utf8", (readErr, fileData) => {
+          if (readErr) {
+            console.error(`${path.basename(filePath)} ni o'qishda xatolik:`, readErr)
+            return
+          }
+          try {
+            if (!fileData.trim()) throw new Error("Fayl bo'sh")
+            const parsedData = JSON.parse(fileData)
+            if (!Array.isArray(parsedData)) throw new Error("Massiv emas")
+            console.log(`${path.basename(filePath)} fayli yaroqli.`)
+          } catch (parseOrEmptyErr) {
+            console.warn(`${path.basename(filePath)} yaroqsiz yoki bo'sh. Bo'sh massiv bilan qayta yoziladi.`)
+            writeJsonFile(filePath, [], (fixWriteErr) => {
+              if (fixWriteErr) {
+                console.error(`${path.basename(filePath)} ni tuzatishda xatolik:`, fixWriteErr)
+              } else {
+                console.log(`${path.basename(filePath)} fayli muvaffaqiyatli tuzatildi.`)
+              }
+            })
+          }
+        })
+      }
+    })
+  })
+}
+
+// Start server
 app.listen(PORT, () => {
-    console.log(`Server http://localhost:${PORT} da ishlamoqda`);
-    
-    const filesToInitialize = ['messages.json', 'users.json'];
-    filesToInitialize.forEach(fileName => {
-        fs.readFile(fileName, 'utf8', (err, fileData) => {
-            let needsWrite = false;
-            let contentToWrite = [];
-
-            if (err && err.code === 'ENOENT') { // Fayl mavjud emas
-                console.log(`${fileName} fayli topilmadi. Yangisi yaratiladi.`);
-                needsWrite = true;
-            } else if (err) { // Boshqa o'qish xatoliklari
-                console.error(`${fileName} ni tekshirishda o'qish xatoligi:`, err);
-                return; // Xatolik bo'lsa, yozishga urinmaymiz
-            } else { // Fayl mavjud, tarkibini tekshiramiz
-                try {
-                    if (!fileData.trim()) { // Fayl bo'sh
-                        console.log(`${fileName} fayli bo'sh. Massiv bilan to'ldiriladi.`);
-                        needsWrite = true;
-                    } else {
-                        const parsedData = JSON.parse(fileData);
-                        if (!Array.isArray(parsedData)) {
-                            console.warn(`${fileName} massiv emas. Bo'sh massiv bilan ustiga yozilmoqda.`);
-                            needsWrite = true;
-                        }
-                        // Agar fayl mavjud va yaroqli massiv bo'lsa, yozish shart emas
-                    }
-                } catch (parseErr) {
-                    console.error(`${fileName} ni tekshirishda JSON parse xatoligi. Bo'sh massiv bilan ustiga yozilmoqda.`, parseErr);
-                    needsWrite = true;
-                }
-            }
-
-            if (needsWrite) {
-                fs.writeFile(fileName, JSON.stringify(contentToWrite, null, 2), (writeErr) => {
-                    if (writeErr) console.error(`${fileName} faylini (${needsWrite ? "yangi" : "yangilangan"}) ishga tushirishda xatolik:`, writeErr);
-                    else console.log(`${fileName} fayli muvaffaqiyatli ${needsWrite ? "yaratildi/yangilandi" : "tekshirildi"}.`);
-                });
-            }
-        });
-    });
-});
+  console.log(`Server http://localhost:${PORT} da ishlamoqda`)
+  initializeFiles()
+})
