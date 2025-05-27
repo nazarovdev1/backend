@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": "78a4b5e3-c88a-4134-89ee-89e7bf79a574",
+    "username": "asd@gmail.com",
+    "password": "asdasdasd",
+    "fullName": "asd"
+  },
+  {
+    "id": "1a12f1c8-8a9c-4b2d-9e56-7bacc953ee5f",
+    "username": "dsa@gmail.com",
+    "password": "asdasdasd",
+    "fullName": "asddsa",
+    "role": "admin"
+  },
+  {
+    "id": "c9891d38-f028-47fe-b83c-cce62cc2eb9e",
+    "username": "asda@gmail.com",
+    "password": "asdasdasd",
+    "fullName": "asd",
+    "role": "admin"
+  },
+  {
+    "id": "28bc1e47-7d99-475d-a100-e45e469c064e",
+    "username": "dsad@gmail.com",
+    "password": "asdasdasd",
+    "fullName": "asddsadd",
+    "role": "admin"
+  }
+]

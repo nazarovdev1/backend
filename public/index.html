@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="font-sans bg-gray-50">
     <!-- Navigation -->
     <nav class="gradient-bg text-white shadow-lg">
@@ -21,15 +23,20 @@
                 <a href="#how-it-works" class="hover:text-gray-200 transition">How It Works</a>
                 <a href="#contact" class="hover:text-gray-200 transition">Contact</a>
             </div>
-            <a href="/auth.html">
-            <button id="chat-togglee" class="bg-white text-purple-700 px-4 py-2 rounded-full font-semibold hover:bg-gray-100 transition flex items-center">
-                 Login \ Signup
-            </button></a>
+
+            <div id="user-auth-section" class="relative">
+                <a href="/auth.html">
+                    <button
+                        class="bg-white text-purple-700 px-4 py-2 rounded-full font-semibold hover:bg-gray-100 transition flex items-center">
+                        Login / Signup
+                    </button>
+                </a>
+            </div>
+
             <button class="md:hidden text-white" id="mobile-menu-button">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </div>
-        <!-- Mobile menu -->
         <div class="md:hidden hidden bg-purple-800" id="mobile-menu">
             <div class="px-4 py-2 flex flex-col space-y-3">
                 <a href="#services" class="text-white hover:text-gray-200 transition">Services</a>
@@ -44,15 +51,20 @@
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-10 md:mb-0">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Expert Computer Repair Services</h1>
-                <p class="text-xl mb-8">Fast, reliable, and affordable solutions for all your computer problems. We come to you or you come to us - your choice!</p>
+                <p class="text-xl mb-8">Fast, reliable, and affordable solutions for all your computer problems. We come
+                    to you or you come to us - your choice!</p>
                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                    <a href="#contact" class="bg-white text-purple-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition text-center">Get Help Now</a>
-                    <a href="#services" class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-700 transition text-center">Our Services</a>
+                    <a href="#contact"
+                        class="bg-white text-purple-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition text-center">Get
+                        Help Now</a>
+                    <a href="#services"
+                        class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-700 transition text-center">Our
+                        Services</a>
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
-                     alt="Computer repair" class="rounded-lg shadow-2xl max-w-full h-auto">
+                <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+                    alt="Computer repair" class="rounded-lg shadow-2xl max-w-full h-auto">
             </div>
         </div>
     </section>
@@ -68,39 +80,51 @@
                         <i class="fas fa-tools text-4xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Hardware Repair</h3>
-                    <p class="text-gray-600 mb-4">Component replacement, upgrades, and diagnostics for all computer hardware issues.</p>
+                    <p class="text-gray-600 mb-4">Component replacement, upgrades, and diagnostics for all computer
+                        hardware issues.</p>
                     <ul class="text-gray-600 space-y-2 mb-4">
-                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> RAM replacement</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Hard drive installation</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Power supply issues</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> RAM
+                            replacement</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Hard drive
+                            installation</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Power
+                            supply issues</li>
                     </ul>
                 </div>
-                
+
                 <!-- Service 2 -->
                 <div class="bg-gray-50 rounded-xl p-6 shadow-md service-card transition">
                     <div class="text-purple-600 mb-4">
                         <i class="fas fa-desktop text-4xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Software Solutions</h3>
-                    <p class="text-gray-600 mb-4">Operating system installation, virus removal, and software troubleshooting.</p>
+                    <p class="text-gray-600 mb-4">Operating system installation, virus removal, and software
+                        troubleshooting.</p>
                     <ul class="text-gray-600 space-y-2 mb-4">
-                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Windows installation</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Virus/malware removal</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Driver updates</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Windows
+                            installation</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            Virus/malware removal</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Driver
+                            updates</li>
                     </ul>
                 </div>
-                
+
                 <!-- Service 3 -->
                 <div class="bg-gray-50 rounded-xl p-6 shadow-md service-card transition">
                     <div class="text-purple-600 mb-4">
                         <i class="fas fa-network-wired text-4xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Network Support</h3>
-                    <p class="text-gray-600 mb-4">Internet connectivity issues, WiFi setup, and network configuration.</p>
+                    <p class="text-gray-600 mb-4">Internet connectivity issues, WiFi setup, and network configuration.
+                    </p>
                     <ul class="text-gray-600 space-y-2 mb-4">
-                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Router setup</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Connection troubleshooting</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Network security</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Router
+                            setup</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Connection
+                            troubleshooting</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Network
+                            security</li>
                     </ul>
                 </div>
             </div>
@@ -120,7 +144,7 @@
                     <h3 class="text-xl font-semibold mb-3">Contact Us</h3>
                     <p class="text-gray-600">Call our support center or use our live chat to describe your problem.</p>
                 </div>
-                
+
                 <!-- Step 2 -->
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -129,7 +153,7 @@
                     <h3 class="text-xl font-semibold mb-3">Choose Solution</h3>
                     <p class="text-gray-600">We'll provide options: remote help, on-site visit, or drop-off service.</p>
                 </div>
-                
+
                 <!-- Step 3 -->
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -147,12 +171,14 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                         alt="Call center" class="rounded-lg shadow-xl max-w-full h-auto">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Call center" class="rounded-lg shadow-xl max-w-full h-auto">
                 </div>
                 <div class="md:w-1/2 md:pl-12">
                     <h2 class="text-3xl font-bold mb-6 text-gray-800">24/7 Call Center Support</h2>
-                    <p class="text-gray-600 mb-6">Our professional support team is available around the clock to help with your computer problems. Whether it's internet connectivity issues, software problems, or hardware malfunctions, we're here to help.</p>
+                    <p class="text-gray-600 mb-6">Our professional support team is available around the clock to help
+                        with your computer problems. Whether it's internet connectivity issues, software problems, or
+                        hardware malfunctions, we're here to help.</p>
                     <div class="bg-purple-50 p-6 rounded-lg mb-6">
                         <h3 class="text-xl font-semibold mb-3 text-purple-700">How it works:</h3>
                         <ol class="list-decimal list-inside space-y-2 text-gray-700">
@@ -167,7 +193,9 @@
                         <i class="fas fa-phone-volume text-3xl text-purple-600 mr-4"></i>
                         <div>
                             <p class="text-gray-500">Call us anytime</p>
-                            <a href="tel:+1234567890" class="text-2xl font-bold text-gray-800 hover:text-purple-600 transition">+1 (234) 567-890</a>
+                            <a href="tel:+1234567890"
+                                class="text-2xl font-bold text-gray-800 hover:text-purple-600 transition">+1 (234)
+                                567-890</a>
                         </div>
                     </div>
                 </div>
@@ -181,8 +209,9 @@
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12">
                     <h2 class="text-3xl font-bold mb-6 text-gray-800">Live Chat Support</h2>
-                    <p class="text-gray-600 mb-6">Can't get through on the phone? Our live chat support is available 24/7 to help with your computer issues. Describe your problem and we'll provide solutions.</p>
-                    
+                    <p class="text-gray-600 mb-6">Can't get through on the phone? Our live chat support is available
+                        24/7 to help with your computer issues. Describe your problem and we'll provide solutions.</p>
+
                     <div class="bg-white p-6 rounded-lg shadow-md mb-6">
                         <h3 class="text-xl font-semibold mb-3 text-purple-700">When phone support isn't available:</h3>
                         <ul class="list-disc list-inside space-y-2 text-gray-700">
@@ -191,7 +220,7 @@
                             <li>If remote help isn't possible, we'll provide options</li>
                         </ul>
                     </div>
-                    
+
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="text-xl font-semibold mb-3 text-purple-700">Delivery Options:</h3>
                         <p class="text-gray-700 mb-3">For computers that can't be fixed remotely, choose from:</p>
@@ -252,7 +281,8 @@
                             </div>
                             <div class="flex mb-4">
                                 <div class="bg-gray-100 p-3 rounded-lg chat-message">
-                                    <p>I'm sorry to hear that. Let's try some troubleshooting steps. First, could you tell me if other devices in your home can connect to the internet?</p>
+                                    <p>I'm sorry to hear that. Let's try some troubleshooting steps. First, could you
+                                        tell me if other devices in your home can connect to the internet?</p>
                                 </div>
                             </div>
                             <div class="flex mb-4 justify-end">
@@ -262,14 +292,17 @@
                             </div>
                             <div class="flex mb-4">
                                 <div class="bg-gray-100 p-3 rounded-lg chat-message">
-                                    <p>Thanks. Let's try resetting your network adapter. Press Windows key + X and select "Device Manager". Can you find "Network adapters" in the list?</p>
+                                    <p>Thanks. Let's try resetting your network adapter. Press Windows key + X and
+                                        select "Device Manager". Can you find "Network adapters" in the list?</p>
                                 </div>
                             </div>
                         </div>
                         <div class="p-4 border-t">
                             <div class="flex">
-                                <input type="text" placeholder="Type your message..." class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
-                                <button class="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 transition">
+                                <input type="text" placeholder="Type your message..."
+                                    class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <button
+                                    class="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 transition">
                                     <i class="fas fa-paper-plane"></i>
                                 </button>
                             </div>
@@ -286,8 +319,9 @@
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0">
                     <h2 class="text-3xl font-bold mb-6 text-gray-800">Business IT Support</h2>
-                    <p class="text-gray-600 mb-6">For businesses with multiple computer issues, we provide dedicated on-site technicians to resolve all your IT problems efficiently.</p>
-                    
+                    <p class="text-gray-600 mb-6">For businesses with multiple computer issues, we provide dedicated
+                        on-site technicians to resolve all your IT problems efficiently.</p>
+
                     <div class="bg-gray-50 p-6 rounded-lg shadow-sm mb-6">
                         <h3 class="text-xl font-semibold mb-3 text-purple-700">Our Business Support Includes:</h3>
                         <ul class="list-disc list-inside space-y-2 text-gray-700">
@@ -298,18 +332,19 @@
                             <li>Bulk discounts for multiple repairs</li>
                         </ul>
                     </div>
-                    
+
                     <div class="flex items-center">
                         <i class="fas fa-briefcase text-3xl text-purple-600 mr-4"></i>
                         <div>
                             <p class="text-gray-500">Business inquiries</p>
-                            <a href="mailto:business@techfixpro.com" class="text-xl font-semibold text-gray-800 hover:text-purple-600 transition">business@techfixpro.com</a>
+                            <a href="mailto:business@techfixpro.com"
+                                class="text-xl font-semibold text-gray-800 hover:text-purple-600 transition">business@techfixpro.com</a>
                         </div>
                     </div>
                 </div>
                 <div class="md:w-1/2 md:pl-12">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                         alt="Business support" class="rounded-lg shadow-xl max-w-full h-auto">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Business support" class="rounded-lg shadow-xl max-w-full h-auto">
                 </div>
             </div>
         </div>
@@ -319,8 +354,9 @@
     <section class="py-16 bg-gray-100">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-6 text-gray-800">Simple Payment Process</h2>
-            <p class="text-gray-600 max-w-3xl mx-auto mb-10">We believe in fair pricing and only charge after your computer problem is completely resolved. No upfront payments required.</p>
-            
+            <p class="text-gray-600 max-w-3xl mx-auto mb-10">We believe in fair pricing and only charge after your
+                computer problem is completely resolved. No upfront payments required.</p>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <!-- Payment Step 1 -->
                 <div class="bg-white p-6 rounded-xl shadow-md">
@@ -328,18 +364,20 @@
                         <i class="fas fa-search-dollar text-purple-600 text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Diagnosis</h3>
-                    <p class="text-gray-600">We diagnose the problem and provide a cost estimate before any work begins.</p>
+                    <p class="text-gray-600">We diagnose the problem and provide a cost estimate before any work begins.
+                    </p>
                 </div>
-                
+
                 <!-- Payment Step 2 -->
                 <div class="bg-white p-6 rounded-xl shadow-md">
                     <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-tools text-purple-600 text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Repair</h3>
-                    <p class="text-gray-600">Our technicians fix the issue while keeping you informed throughout the process.</p>
+                    <p class="text-gray-600">Our technicians fix the issue while keeping you informed throughout the
+                        process.</p>
                 </div>
-                
+
                 <!-- Payment Step 3 -->
                 <div class="bg-white p-6 rounded-xl shadow-md">
                     <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -394,26 +432,36 @@
                 <div class="md:w-1/2">
                     <div class="bg-gray-50 p-8 rounded-xl shadow-sm">
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">Send Us a Message</h3>
-                        <form>
+                        <form id="contactForm">
                             <div class="mb-4">
-                                <label for="name" class="block text-gray-700 mb-2">Your Name</label>
-                                <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <label for="contactName" class="block text-gray-700 mb-2">Your Name</label>
+                                <input type="text" id="contactName" name="name"
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    required>
                             </div>
                             <div class="mb-4">
-                                <label for="email" class="block text-gray-700 mb-2">Email Address</label>
-                                <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <label for="contactEmail" class="block text-gray-700 mb-2">Email Address</label>
+                                <input type="email" id="contactEmail" name="email"
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    required>
                             </div>
                             <div class="mb-4">
-                                <label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
-                                <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <label for="contactPhone" class="block text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" id="contactPhone" name="phone"
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
                             </div>
                             <div class="mb-4">
-                                <label for="message" class="block text-gray-700 mb-2">Describe Your Problem</label>
-                                <textarea id="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+                                <label for="contactMessage" class="block text-gray-700 mb-2">Describe Your
+                                    Problem</label>
+                                <textarea id="contactMessage" name="message" rows="4"
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    required></textarea>
                             </div>
-                            <button type="submit" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition w-full">
+                            <button type="submit"
+                                class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition w-full">
                                 Send Message
                             </button>
+                            <p id="contactFormStatus" class="mt-4 text-sm"></p>
                         </form>
                     </div>
                 </div>
@@ -423,7 +471,8 @@
 
     <!-- Floating Chat Button -->
     <div id="floating-chat" class="fixed bottom-8 right-8 hidden">
-        <button class="bg-purple-600 text-white w-16 h-16 rounded-full shadow-xl flex items-center justify-center floating-button hover:bg-purple-700 transition">
+        <button
+            class="bg-purple-600 text-white w-16 h-16 rounded-full shadow-xl flex items-center justify-center floating-button hover:bg-purple-700 transition">
             <i class="fas fa-comment-dots text-2xl"></i>
         </button>
     </div>
@@ -453,7 +502,8 @@
         </div>
         <div class="p-4 border-t">
             <div class="flex">
-                <input type="text" placeholder="Type your message..." class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <input type="text" placeholder="Type your message..."
+                    class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
                 <button class="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 transition">
                     <i class="fas fa-paper-plane"></i>
                 </button>
@@ -490,15 +540,21 @@
                 <div>
                     <h4 class="font-semibold mb-4">Connect</h4>
                     <div class="flex space-x-4 mb-4">
-                        <a href="#" class="text-purple-200 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-purple-200 hover:text-white transition"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-purple-200 hover:text-white transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-purple-200 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-purple-200 hover:text-white transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-purple-200 hover:text-white transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-purple-200 hover:text-white transition"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-purple-200 hover:text-white transition"><i
+                                class="fab fa-linkedin-in"></i></a>
                     </div>
                     <p class="text-purple-200">Subscribe to our newsletter</p>
                     <div class="flex mt-2">
-                        <input type="email" placeholder="Your email" class="flex-grow px-3 py-2 rounded-l-lg text-gray-800 focus:outline-none">
-                        <button class="bg-white text-purple-700 px-3 py-2 rounded-r-lg font-semibold hover:bg-gray-100 transition">
+                        <input type="email" placeholder="Your email"
+                            class="flex-grow px-3 py-2 rounded-l-lg text-gray-800 focus:outline-none">
+                        <button
+                            class="bg-white text-purple-700 px-3 py-2 rounded-r-lg font-semibold hover:bg-gray-100 transition">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
@@ -512,4 +568,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -20,3 +20,44 @@
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
+        /* public/style.css yoki index.html dagi <style> ichiga qo'shing */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #4c51bf; /* Tailwind indigo-600 ga yaqin rang */
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 100; /* Boshqa elementlar ustida turishi uchun */
+    border-radius: 0.375rem; /* rounded-md */
+    margin-top: 0.5rem; /* Tailwind mt-2 */
+}
+
+.dropdown-content button {
+    color: white;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: #434190; /* To'qroq indigo */
+}
+
+/* .user-dropdown:hover .dropdown-content {  <-- Buni olib tashlaymiz, faqat JS orqali boshqaramiz */
+/* display: block; */
+/* } */
+
+.user-dropdown .dropdown-content.show { /* JavaScript orqali .show classini qo'shamiz */
+    display: block;
+}

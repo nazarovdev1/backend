@@ -1,4 +1,4 @@
-        const signInTab = document.getElementById('signInTab');
+const signInTab = document.getElementById('signInTab');
         const signUpTab = document.getElementById('signUpTab');
         const signInForm = document.getElementById('signInForm');
         const signUpForm = document.getElementById('signUpForm');
@@ -8,7 +8,7 @@
 
         const messageArea = document.getElementById('messageArea');
 
-        // --- Form Switching ---
+        // --- Formalarni almashtirish ---
         function showForm(formName) {
             if (formName === 'signIn') {
                 signInForm.classList.remove('form-hidden');
@@ -31,14 +31,13 @@
                 signInTab.classList.remove('tab-active');
                 signInTab.classList.add('tab-inactive');
             }
-            // Clear any previous messages
             hideMessage();
         }
 
-        // --- Message Display ---
+        // --- Xabarlarni ko'rsatish ---
         function showMessage(message, type = 'success') {
             messageArea.textContent = message;
-            messageArea.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700');
+            messageArea.className = 'mt-6 p-4 rounded-lg text-center'; 
             if (type === 'success') {
                 messageArea.classList.add('bg-green-100', 'text-green-700');
             } else if (type === 'error') {
@@ -52,109 +51,168 @@
             messageArea.textContent = '';
         }
 
-
-        // --- Email Validation ---
+        // --- Email tekshiruvi ---
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
-
-        // --- Input Validation & Error Display ---
+        
+        // --- Kiritishni tekshirish va xatolikni ko'rsatish ---
         function validateAndShowError(inputElement, errorElement, validationFn, errorMessage) {
-            if (!validationFn(inputElement.value)) {
-                errorElement.textContent = errorMessage;
-                errorElement.classList.remove('hidden');
+            if (!inputElement) return true; 
+            const value = inputElement.value.trim();
+            if (!validationFn(value)) {
+                if (errorElement) {
+                    errorElement.textContent = errorMessage;
+                    errorElement.classList.remove('hidden');
+                }
                 inputElement.classList.add('border-red-500');
                 inputElement.classList.remove('border-gray-300', 'focus:border-indigo-500');
                 return false;
             } else {
-                errorElement.classList.add('hidden');
+                if (errorElement) {
+                    errorElement.classList.add('hidden');
+                }
                 inputElement.classList.remove('border-red-500');
                 inputElement.classList.add('border-gray-300', 'focus:border-indigo-500');
                 return true;
             }
         }
 
-        // Sign In Email Validation
+        // Kirish formalari elementlari
         const signInEmailInput = document.getElementById('signInEmail');
         const signInEmailError = document.getElementById('signInEmailError');
-        signInEmailInput.addEventListener('input', () => {
-            validateAndShowError(signInEmailInput, signInEmailError, isValidEmail, 'Yaroqli elektron pochta manzilini kiriting.');
-        });
+        const signInPasswordInput = document.getElementById('signInPassword');
+        
+        if (signInEmailInput) {
+            signInEmailInput.addEventListener('input', () => {
+                validateAndShowError(signInEmailInput, signInEmailError, isValidEmail, 'Yaroqli elektron pochta manzilini kiriting.');
+            });
+        }
 
-        // Sign Up Email Validation
+        // Ro'yxatdan o'tish formalari elementlari
+        const signUpFullNameInput = document.getElementById('signUpFullName');
         const signUpEmailInput = document.getElementById('signUpEmail');
         const signUpEmailError = document.getElementById('signUpEmailError');
-        signUpEmailInput.addEventListener('input', () => {
-            validateAndShowError(signUpEmailInput, signUpEmailError, isValidEmail, 'Yaroqli elektron pochta manzilini kiriting.');
-        });
-
-        // Sign Up Password Validation (Length)
         const signUpPasswordInput = document.getElementById('signUpPassword');
         const signUpPasswordError = document.getElementById('signUpPasswordError');
-        signUpPasswordInput.addEventListener('input', () => {
-            validateAndShowError(signUpPasswordInput, signUpPasswordError, (val) => val.length >= 8, 'Parol kamida 8 belgidan iborat boʻlishi kerak.');
-        });
-
-        // Sign Up Confirm Password Validation
         const confirmPasswordInput = document.getElementById('confirmPassword');
         const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+        if (signUpEmailInput) {
+            signUpEmailInput.addEventListener('input', () => {
+                validateAndShowError(signUpEmailInput, signUpEmailError, isValidEmail, 'Yaroqli elektron pochta manzilini kiriting.');
+            });
+        }
+        if (signUpPasswordInput) {
+            signUpPasswordInput.addEventListener('input', () => {
+                validateAndShowError(signUpPasswordInput, signUpPasswordError, (val) => val.length >= 8, 'Parol kamida 8 belgidan iborat boʻlishi kerak.');
+                if (confirmPasswordInput && confirmPasswordInput.value) validateConfirmPassword();
+            });
+        }
         function validateConfirmPassword() {
+            if (!confirmPasswordInput || !signUpPasswordInput) return true;
             return validateAndShowError(confirmPasswordInput, confirmPasswordError, (val) => val === signUpPasswordInput.value, 'Parollar mos kelmadi.');
         }
-        confirmPasswordInput.addEventListener('input', validateConfirmPassword);
-        signUpPasswordInput.addEventListener('input', () => { // Re-validate confirm if main password changes
-            if (confirmPasswordInput.value) {
-                validateConfirmPassword();
-            }
-        });
+        if (confirmPasswordInput) {
+            confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+        }
+        
 
+        // --- Formani yuborishni qayta ishlash (Kirish) ---
+        if (signInActualForm) {
+            signInActualForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                hideMessage();
+                let isValid = true;
+                isValid = validateAndShowError(signInEmailInput, signInEmailError, isValidEmail, 'Yaroqli elektron pochta manzilini kiriting.') && isValid;
+                isValid = validateAndShowError(signInPasswordInput, null, (val) => val.length > 0, 'Parolni kiriting.') && isValid;
 
-        // --- Form Submission Handling (Placeholder) ---
-        signInActualForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent actual submission for this demo
-            hideMessage();
-            let isValid = true;
-            isValid = validateAndShowError(signInEmailInput, signInEmailError, isValidEmail, 'Yaroqli elektron pochta manzilini kiriting.') && isValid;
+                if (isValid) {
+                    const username = signInEmailInput.value;
+                    const password = signInPasswordInput.value;
+                    try {
+                        const response = await fetch('/api/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username, password })
+                        });
+                        const data = await response.json();
+                        if (response.ok) {
+                            showMessage('Muvaffaqiyatli kirildi!', 'success');
+                            localStorage.setItem('loggedInUserFullName', data.fullName);
+                            localStorage.setItem('loggedInUserName', data.username);
+                            window.location.href = '/index.html';
+                        } else {
+                            showMessage(data.message || 'Kirishda xatolik.', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Kirish xatoligi:', error);
+                        showMessage('Server bilan bogʻlanishda xatolik.', 'error');
+                    }
+                } else {
+                    showMessage('Iltimos, xatolarni tuzating.', 'error');
+                }
+            });
+        }
 
-            if (isValid && signInPassword.value) {
-                console.log('Sign In form submitted (demo)');
-                console.log('Email:', signInEmailInput.value);
-                // In a real app, you would send this data to a server.
-                showMessage('Muvaffaqiyatli kirildi! (Demo)', 'success');
-                signInActualForm.reset(); // Clear form
-            } else if (!signInPassword.value) {
-                 showMessage('Iltimos, parolni kiriting.', 'error');
-            } else {
-                showMessage('Iltimos, xatolarni tuzating.', 'error');
-            }
-        });
+        // --- Formani yuborishni qayta ishlash (Ro'yxatdan o'tish) ---
+        if (signUpActualForm) {
+            signUpActualForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                hideMessage();
+                let isValid = true;
+                isValid = validateAndShowError(signUpFullNameInput, null, (val) => val.trim().length > 0, 'Toʻliq ismni kiriting') && isValid;
+                isValid = validateAndShowError(signUpEmailInput, signUpEmailError, isValidEmail, 'Yaroqli elektron pochta manzilini kiriting.') && isValid;
+                isValid = validateAndShowError(signUpPasswordInput, signUpPasswordError, (val) => val.length >= 8, 'Parol kamida 8 belgidan iborat boʻlishi kerak.') && isValid;
+                isValid = validateConfirmPassword() && isValid;
 
-        signUpActualForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent actual submission for this demo
-            hideMessage();
-            let isValid = true;
-            isValid = validateAndShowError(signUpEmailInput, signUpEmailError, isValidEmail, 'Yaroqli elektron pochta manzilini kiriting.') && isValid;
-            isValid = validateAndShowError(signUpPasswordInput, signUpPasswordError, (val) => val.length >= 8, 'Parol kamida 8 belgidan iborat boʻlishi kerak.') && isValid;
-            isValid = validateConfirmPassword() && isValid;
+                const termsCheckbox = document.getElementById('terms');
+                if (termsCheckbox && !termsCheckbox.checked) {
+                    isValid = false;
+                    showMessage('Iltimos, foydalanish shartlari va maxfiylik siyosatiga rozilik bildiring.', 'error');
+                }
+                
+                // Tanlangan rolni olish
+                const selectedRole = document.querySelector('input[name="signUpRole"]:checked');
+                if (!selectedRole) {
+                    isValid = false;
+                    showMessage('Iltimos, rolni tanlang.', 'error');
+                }
 
-            const termsCheckbox = document.getElementById('terms');
-            if (!termsCheckbox.checked) {
-                isValid = false;
-                showMessage('Iltimos, foydalanish shartlari va maxfiylik siyosatiga rozilik bildiring.', 'error');
-            }
+                if (isValid) {
+                    const fullName = signUpFullNameInput.value;
+                    const username = signUpEmailInput.value;
+                    const password = signUpPasswordInput.value;
+                    const role = selectedRole.value; // 'user' yoki 'admin'
 
+                    try {
+                        const response = await fetch('/api/register', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username, password, fullName, role })
+                        });
+                        const data = await response.json();
+                        if (response.ok) {
+                            showMessage('Muvaffaqiyatli roʻyxatdan oʻtdingiz!', 'success');
+                            localStorage.setItem('loggedInUserFullName', data.fullName); // serverdan fullName qaytarilishi kerak
+                            localStorage.setItem('loggedInUserName', data.username);  // serverdan username qaytarilishi kerak
 
-            if (isValid) {
-                console.log('Sign Up form submitted (demo)');
-                console.log('Full Name:', document.getElementById('signUpFullName').value);
-                console.log('Email:', signUpEmailInput.value);
-                // In a real app, you would send this data to a server.
-                showMessage('Muvaffaqiyatli roʻyxatdan oʻtdingiz! (Demo)', 'success');
-                signUpActualForm.reset(); // Clear form
-            } else if (termsCheckbox.checked) { // Only show general error if terms were checked but other fields failed
-                showMessage('Iltimos, barcha xatolarni tuzating.', 'error');
-            }
-        });
-
+                            if (role === 'admin') {
+                                window.location.href = '/dashboard.html';
+                            } else { // role === 'user'
+                                window.location.href = '/index.html';
+                            }
+                        } else {
+                            showMessage(data.message || 'Roʻyxatdan oʻtishda xatolik.', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Roʻyxatdan oʻtish xatoligi:', error);
+                        showMessage('Server bilan bogʻlanishda xatolik.', 'error');
+                    }
+                } else if (termsCheckbox && termsCheckbox.checked && selectedRole) { 
+                    showMessage('Iltimos, barcha xatolarni tuzating.', 'error');
+                }
+            });
+        }
         showForm('signIn');
