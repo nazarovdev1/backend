@@ -1,40 +1,14 @@
 [
   {
-    "name": "Test Ism",
-    "email": "test@example.com",
-    "phone": "123456789",
-    "problem": "Bu test xabari",
-    "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "timestamp": "2024-05-27T00:00:00.000Z",
-    "status": "Yangi"
-  },
-  {
-    "name": "Test Ism",
-    "email": "test@example.com",
-    "phone": "123456789",
-    "problem": "Bu test xabari",
-    "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "timestamp": "2024-05-27T00:00:00.000Z",
-    "status": "Yangi"
-  },
-  {
-    "id": "4d12cf35-09da-4825-b477-f57df805011b",
-    "name": "asdasdasd",
-    "email": "asdasdasd@gmail.com",
-    "phone": "+998 90 523 69 66",
-    "subject": "asdasd",
-    "message": "asdasd",
-    "timestamp": "2025-05-27T07:04:05.461Z",
-    "status": "Yangi"
-  },
-  {
     "id": "70f211fa-b88c-4bf5-9c00-e8fdde7c04c9",
     "name": "Akbar nazarov",
     "email": "akbarnazarov109@gmail.com",
-    "phone": "(88) 429 99 69",
+    "phone": "(88) 429 99 79",
     "subject": "asdasd",
     "message": "asdasdasdasdasdadadasdasasd",
     "timestamp": "2025-05-27T08:48:54.052Z",
     "status": "Yangi"
   }
 ]
+
+

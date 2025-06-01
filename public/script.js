@@ -32,6 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
       floatingChat.classList.remove("hidden")
     })
   }
+**
+
+
+
+
+** 
 
   // Contact form submission
   const contactForm = document.getElementById("contactForm")

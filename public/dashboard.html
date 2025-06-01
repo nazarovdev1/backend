@@ -1,234 +1,613 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard - Xabarlar Boshqaruvi</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .hidden {
+        .hidden { display: none !important; }
+        .modal { 
+            backdrop-filter: blur(4px); 
+            animation: fadeIn 0.2s ease-out;
+        }
+        .modal-content { 
+            animation: slideIn 0.2s ease-out; 
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: slideInRight 0.3s ease-out;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .sidebar-collapsed {
+            width: 64px;
+        }
+        .sidebar-collapsed .sidebar-text {
             display: none;
+        }
+        .table-row-new {
+            background-color: #eff6ff;
+        }
+        .table-row-new:hover {
+            background-color: #dbeafe;
+        }
+        .action-button {
+            transition: all 0.2s ease;
+        }
+        .action-button:hover {
+            transform: scale(1.05);
+        }
+        .truncate-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .loading-spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body class="bg-gray-100">
-
     <div class="flex h-screen">
-
         <!-- Sidebar -->
-        <div class="bg-gray-800 text-white w-64 py-4 px-3">
+        <div id="sidebar" class="bg-gray-800 text-white w-64 py-4 px-3 transition-all duration-300">
             <div class="mb-8">
-                <h1 class="text-2xl font-bold">Dashboard</h1>
+                <h1 class="text-2xl font-bold sidebar-text">Dashboard</h1>
+                <h1 class="text-xl font-bold hidden" id="sidebar-collapsed-title">DB</h1>
             </div>
             <ul>
-                <li class="mb-2"><a href="#" class="block hover:bg-gray-700 py-2 px-4 rounded"><i class="fas fa-home mr-2"></i>Asosiy</a></li>
-                <li class="mb-2"><a href="#" class="block hover:bg-gray-700 py-2 px-4 rounded"><i class="fas fa-envelope mr-2"></i>Xabarlar</a></li>
-                <li class="mb-2"><a href="#" class="block hover:bg-gray-700 py-2 px-4 rounded"><i class="fas fa-users mr-2"></i>Foydalanuvchilar</a></li>
-                <li class="mb-2"><a href="#" class="block hover:bg-gray-700 py-2 px-4 rounded"><i class="fas fa-cog mr-2"></i>Sozlamalar</a></li>
+                <li class="mb-2">
+                    <a href="#" class="flex items-center hover:bg-gray-700 py-2 px-4 rounded transition-colors">
+                        <i class="fas fa-home mr-3"></i>
+                        <span class="sidebar-text">Asosiy</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" class="flex items-center hover:bg-gray-700 py-2 px-4 rounded transition-colors bg-gray-700">
+                        <i class="fas fa-envelope mr-3"></i>
+                        <span class="sidebar-text">Xabarlar</span>
+                        <span id="unreadCount" class="sidebar-text ml-auto bg-blue-500 text-white text-xs rounded-full px-2 py-1">0</span>
+                    </a>
+                </li>
             </ul>
         </div>
 
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
-
             <!-- Header -->
-            <header class="bg-white shadow">
+            <header class="bg-white shadow-sm border-b">
                 <div class="flex items-center justify-between p-4">
-                    <div class="flex items-center">
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-700">
-                            <i class="fas fa-bars"></i>
+                    <div class="flex items-center gap-4">
+                        <button id="sidebarToggle" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                            <i class="fas fa-bars text-lg"></i>
                         </button>
-                        <div class="ml-4">
-                            <input type="text" placeholder="Qidirish..." class="border rounded py-2 px-3">
+                        <div class="relative">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input 
+                                type="text" 
+                                id="searchInput"
+                                placeholder="Qidirish..." 
+                                class="border border-gray-300 rounded-lg py-2 pl-10 pr-4 w-80 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            >
                         </div>
                     </div>
-                    <div>
-                        <i class="fas fa-bell mr-4"></i>
-                        <i class="fas fa-user-circle text-2xl"></i>
+                    <div class="flex items-center gap-4">
+                        <button class="relative text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-bell text-lg"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                        </button>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-user-circle text-2xl text-gray-500"></i>
+                            <span class="text-sm text-gray-700">Admin</span>
+                        </div>
                     </div>
                 </div>
             </header>
 
             <!-- Content -->
-            <main class="flex-1 bg-gray-100 p-4">
-                <section>
-                    <h2 class="text-xl font-semibold mb-4">Xabarlar</h2>
-                    <div id="messages" class="space-y-4">
-                        <!-- Messages will be displayed here -->
+            <main class="flex-1 bg-gray-50 p-6 overflow-auto">
+                <div class="bg-white rounded-lg shadow-sm">
+                    <!-- Header -->
+                    <div class="border-b border-gray-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-envelope text-blue-600 text-xl"></i>
+                                <h2 class="text-xl font-semibold text-gray-800">Xabarlar</h2>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span id="messageCount" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">0 ta xabar</span>
+                                <button id="refreshBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                    <i class="fas fa-sync-alt mr-2"></i>Yangilash
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="flex items-center gap-4">
+                            <label class="text-sm font-medium text-gray-700">Holati bo'yicha:</label>
+                            <select id="statusFilter" class="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Barchasi</option>
+                                <option value="Yangi">Yangi</option>
+                                <option value="O'qilgan">O'qilgan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Loading -->
+                    <div id="loadingDiv" class="flex items-center justify-center py-12">
+                        <div class="loading-spinner"></div>
+                        <span class="ml-3 text-gray-600">Yuklanmoqda...</span>
+                    </div>
+
+                    <!-- No Messages -->
+                    <div id="noMessagesDiv" class="hidden text-center py-12">
+                        <i class="fas fa-inbox text-gray-400 text-4xl mb-4"></i>
+                        <p class="text-gray-500 text-lg">Xabarlar topilmadi</p>
+                    </div>
+
+                    <!-- Messages Table -->
+                    <div id="messagesContainer" class="hidden">
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Sana va Vaqt
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Ism
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Email
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Telefon
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Mavzu / Xabar
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Holati
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Amallar
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody id="messagesTableBody" class="bg-white divide-y divide-gray-200">
-                                    <!-- Message rows will be inserted here -->
+                                    <!-- Messages will be inserted here -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </section>
+                </div>
             </main>
         </div>
     </div>
 
+    <!-- Message Details Modal -->
+    <div id="messageModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 modal">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-content">
+                <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                        <i class="fas fa-envelope-open text-blue-600"></i>
+                        Xabar tafsilotlari
+                    </h3>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="modalContent" class="p-6">
+                    <!-- Modal content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 modal">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full modal-content">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-exclamation-triangle text-red-500 text-2xl"></i>
+                        <h3 class="text-lg font-semibold text-gray-800">Xabarni o'chirish</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">Haqiqatan ham bu xabarni o'chirmoqchimisiz? Bu amalni bekor qilib bo'lmaydi.</p>
+                    <div class="flex justify-end gap-3">
+                        <button id="cancelDelete" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                            Bekor qilish
+                        </button>
+                        <button id="confirmDelete" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                            O'chirish
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer"></div>
+
     <script>
-        const noMessagesFoundDiv = document.createElement('div');
-        noMessagesFoundDiv.id = 'noMessagesFound';
-        noMessagesFoundDiv.className = 'hidden text-center py-8 text-gray-500';
-        noMessagesFoundDiv.innerHTML = '<p>Hech qanday xabar topilmadi.</p>';
-        document.querySelector('section:last-of-type').appendChild(noMessagesFoundDiv);
+        // Mock data
+        let messages = [
+            {
+                id: "70f211fa-b88c-4bf5-9c00-e8fdde7c04c9",
+                name: "Akbar Nazarov",
+                email: "akbarnazarov109@gmail.com",
+                phone: "(88) 429 99 79",
+                subject: "Website haqida savol",
+                message: "Assalomu alaykum! Sizning websitingiz juda yoqdi. Qo'shimcha ma'lumot olsam bo'ladimi? Xizmatlaringiz haqida batafsil ma'lumot kerak.",
+                timestamp: "2025-05-27T08:48:54.052Z",
+                status: "Yangi"
+            },
+            {
+                id: "80f211fa-b88c-4bf5-9c00-e8fdde7c04c8",
+                name: "Malika Karimova",
+                email: "malika.karimova@gmail.com",
+                phone: "+998 91 987 65 43",
+                subject: "Xizmatlar haqida",
+                message: "Salom! Sizning xizmatlaringiz haqida batafsil ma'lumot olishni istardim. Narxlar qanday? Qachon boshlash mumkin?",
+                timestamp: "2025-05-26T15:30:20.000Z",
+                status: "O'qilgan"
+            },
+            {
+                id: "90f211fa-b88c-4bf5-9c00-e8fdde7c04c7",
+                name: "Bobur Toshmatov",
+                email: "bobur.toshmatov@example.com",
+                phone: "+998 90 123 45 67",
+                subject: "Hamkorlik taklifi",
+                message: "Hurmatli jamoa! Sizlar bilan hamkorlik qilishni istardik. Bizning loyiha haqida gaplashsak bo'ladimi?",
+                timestamp: "2025-05-25T09:15:10.000Z",
+                status: "Yangi"
+            },
+            {
+                id: "a0f211fa-b88c-4bf5-9c00-e8fdde7c04c6",
+                name: "Nodira Abdullayeva",
+                email: "nodira.abdullayeva@gmail.com",
+                phone: "",
+                subject: "Texnik yordam",
+                message: "Websiteda muammo bor. Sahifa yuklanmayapti. Yordam bera olasizmi?",
+                timestamp: "2025-05-24T14:22:35.000Z",
+                status: "Yangi"
+            }
+        ];
 
-        const searchInput = document.querySelector('input[placeholder="Qidirish..."]');
+        let filteredMessages = [...messages];
+        let currentDeleteId = null;
 
-        async function fetchAndDisplayMessages() {
-            const messagesDiv = document.getElementById('messages');
-            const noMessagesDiv = document.getElementById('noMessagesFound');
-            const messagesTableBody = document.getElementById('messagesTableBody');
+        // DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const statusFilter = document.getElementById('statusFilter');
+        const messagesTableBody = document.getElementById('messagesTableBody');
+        const loadingDiv = document.getElementById('loadingDiv');
+        const noMessagesDiv = document.getElementById('noMessagesDiv');
+        const messagesContainer = document.getElementById('messagesContainer');
+        const messageCount = document.getElementById('messageCount');
+        const unreadCount = document.getElementById('unreadCount');
+        const messageModal = document.getElementById('messageModal');
+        const deleteModal = document.getElementById('deleteModal');
+        const modalContent = document.getElementById('modalContent');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        const refreshBtn = document.getElementById('refreshBtn');
 
-            try {
-                const response = await fetch('/api/messages'); // Replace with your API endpoint
-                const messages = await response.json();
+        // Utility functions
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString('uz-UZ', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
 
-                // Xabarlarni ko'rsatish uchun to'liq kod
-                messagesTableBody.innerHTML = '';
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast px-6 py-3 rounded-lg shadow-lg text-white ${
+                type === 'success' ? 'bg-green-500' : 'bg-red-500'
+            }`;
+            toast.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.getElementById('toastContainer').appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
 
-                if (messages.length === 0) {
-                    messagesTableBody.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-gray-500">Xabarlar topilmadi</td></tr>';
-                    return;
-                }
+        function updateCounts() {
+            const unread = messages.filter(msg => msg.status === 'Yangi').length;
+            unreadCount.textContent = unread;
+            unreadCount.style.display = unread > 0 ? 'inline' : 'none';
+            
+            messageCount.textContent = `${filteredMessages.length} ta xabar`;
+        }
 
-                messages.forEach(msg => {
-                    const row = messagesTableBody.insertRow();
-                    row.className = `transition-colors duration-150 ${msg.status === 'Yangi' ? 'bg-blue-50 hover:bg-blue-100' : 'bg-white hover:bg-gray-50'}`;
+        function filterMessages() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const statusValue = statusFilter.value;
 
-                    // Sana va Vaqt
-                    const dateCell = row.insertCell();
-                    dateCell.className = "px-6 py-3 whitespace-nowrap text-sm text-gray-600";
-                    dateCell.textContent = new Date(msg.timestamp).toLocaleString('uz-UZ');
-                    
-                    // Ism
-                    const nameCell = row.insertCell();
-                    nameCell.className = "px-6 py-3 whitespace-nowrap text-sm text-gray-800 font-medium";
-                    nameCell.textContent = msg.name || '-';
-                    
-                    // Email
-                    const emailCell = row.insertCell();
-                    emailCell.className = "px-6 py-3 whitespace-nowrap text-sm text-gray-600";
-                    if (msg.email) {
-                        const emailLink = document.createElement('a');
-                        emailLink.href = `mailto:${msg.email}`;
-                        emailLink.textContent = msg.email;
-                        emailLink.className = "text-blue-600 hover:text-blue-800 hover:underline";
-                        emailCell.appendChild(emailLink);
-                    } else {
-                        emailCell.textContent = '-';
-                    }
+            filteredMessages = messages.filter(message => {
+                const matchesSearch = 
+                    message.name.toLowerCase().includes(searchTerm) ||
+                    message.email.toLowerCase().includes(searchTerm) ||
+                    message.subject.toLowerCase().includes(searchTerm) ||
+                    message.message.toLowerCase().includes(searchTerm);
 
-                    // Telefon
-                    const phoneCell = row.insertCell();
-                    phoneCell.className = "px-6 py-3 whitespace-nowrap text-sm text-gray-600";
-                    phoneCell.textContent = msg.phone || '-';
-                    
-                    // Mavzu / Xabar
-                    const messageContentCell = row.insertCell();
-                    messageContentCell.className = "px-6 py-3 text-sm text-gray-600";
-                    messageContentCell.style.minWidth = "250px";
-                    messageContentCell.style.maxWidth = "400px";
-                    
-                    const subjectDiv = document.createElement('div');
-                    subjectDiv.className = "font-semibold text-gray-800 truncate";
-                    subjectDiv.textContent = msg.subject || '(Mavzusiz)';
-                    subjectDiv.title = msg.subject || '(Mavzusiz)';
-                    messageContentCell.appendChild(subjectDiv);
+                const matchesStatus = !statusValue || message.status === statusValue;
 
-                    if(msg.message) {
-                        const messagePreviewDiv = document.createElement('div');
-                        messagePreviewDiv.className = "text-xs text-gray-500 mt-1 truncate";
-                        messagePreviewDiv.title = msg.message; 
-                        messagePreviewDiv.textContent = msg.message.substring(0, 70) + (msg.message.length > 70 ? '...' : '');
-                        messageContentCell.appendChild(messagePreviewDiv);
-                    }
-                    
-                    messageContentCell.style.cursor = 'pointer';
-                    messageContentCell.addEventListener('click', () => {
-                        alert(
-                            `ID: ${msg.id}\n` +
-                            `Kimdan: ${msg.name || '-'}\n` +
-                            `Email: ${msg.email || '-'}\n` +
-                            `Telefon: ${msg.phone || '-'}\n` +
-                            `Vaqti: ${new Date(msg.timestamp).toLocaleString('uz-UZ')}\n` +
-                            `Status: ${msg.status || 'Noma\'lum'}\n\n` +
-                            `Mavzu: ${msg.subject || '(Mavzusiz)'}\n\n` +
-                            `Xabar matni:\n${msg.message || '(Xabar matni yo\'q)'}`
-                        );
-                    });
+                return matchesSearch && matchesStatus;
+            });
 
-                    // Holati
-                    const statusCell = row.insertCell();
-                    statusCell.className = "px-6 py-3 whitespace-nowrap text-sm";
-                    const statusSpan = document.createElement('span');
-                    statusSpan.textContent = msg.status || 'Yangi';
-                    statusSpan.className = 'px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full tracking-wide';
-                    if (msg.status === "O'qilgan") {
-                        statusSpan.classList.add('bg-green-100', 'text-green-700');
-                    } else if (msg.status === 'Yangi') { 
-                        statusSpan.classList.add('bg-blue-100', 'text-blue-700');
-                    } else { 
-                         statusSpan.classList.add('bg-gray-100', 'text-gray-700');
-                    }
-                    statusCell.appendChild(statusSpan);
+            renderMessages();
+        }
 
-                    // Amallar
-                    const actionsCell = row.insertCell();
-                    actionsCell.className = "px-6 py-3 whitespace-nowrap text-sm font-medium space-x-2";
+        function renderMessages() {
+            updateCounts();
 
-                    if (msg.status === 'Yangi') {
-                        const markReadButton = document.createElement('button');
-                        markReadButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.022 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" /></svg>`;
-                        markReadButton.className = 'action-button text-indigo-600 hover:text-indigo-100 hover:bg-indigo-600 p-2 rounded-md transition duration-150 ease-in-out border border-indigo-300 hover:border-indigo-600';
-                        markReadButton.title = "O'qilgan deb belgilash";
-                        markReadButton.onclick = (e) => { e.stopPropagation(); markMessageAsRead(msg.id); };
-                        actionsCell.appendChild(markReadButton);
-                    }
+            if (filteredMessages.length === 0) {
+                messagesContainer.classList.add('hidden');
+                noMessagesDiv.classList.remove('hidden');
+                return;
+            }
 
-                    const deleteButton = document.createElement('button');
-                    deleteButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>`;
-                    deleteButton.className = 'action-button text-red-600 hover:text-red-100 hover:bg-red-600 p-2 rounded-md transition duration-150 ease-in-out border border-red-300 hover:border-red-600';
-                    deleteButton.title = "Xabarni o'chirish";
-                    deleteButton.onclick = (e) => { e.stopPropagation(); deleteMessage(msg.id); };
-                    actionsCell.appendChild(deleteButton);
-                });
-            } catch (error) {
-                console.error("Xatolik yuz berdi:", error);
-                messagesDiv.innerHTML = '<p class="text-red-500">Xabarlarni yuklashda xatolik yuz berdi.</p>';
+            noMessagesDiv.classList.add('hidden');
+            messagesContainer.classList.remove('hidden');
+
+            messagesTableBody.innerHTML = '';
+
+            filteredMessages.forEach(message => {
+                const row = document.createElement('tr');
+                row.className = `transition-colors hover:bg-gray-50 ${
+                    message.status === 'Yangi' ? 'table-row-new' : ''
+                }`;
+
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 font-mono">
+                        ${formatDate(message.timestamp)}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium">
+                        ${message.name}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <a href="mailto:${message.email}" class="text-blue-600 hover:text-blue-800 hover:underline">
+                            ${message.email}
+                        </a>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                        ${message.phone ? `<i class="fas fa-phone text-xs mr-1"></i>${message.phone}` : '-'}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600 max-w-xs">
+                        <div class="cursor-pointer" onclick="showMessageDetails('${message.id}')">
+                            <div class="font-semibold text-gray-800 truncate-text" title="${message.subject}">
+                                ${message.subject || '(Mavzusiz)'}
+                            </div>
+                            ${message.message ? `
+                                <div class="text-xs text-gray-500 mt-1 truncate-text" title="${message.message}">
+                                    ${message.message.substring(0, 50)}${message.message.length > 50 ? '...' : ''}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            message.status === "O'qilgan" 
+                                ? 'bg-green-100 text-green-700' 
+                                : 'bg-blue-100 text-blue-700'
+                        }">
+                            ${message.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div class="flex items-center gap-2">
+                            ${message.status === 'Yangi' ? `
+                                <button 
+                                    onclick="markAsRead('${message.id}')"
+                                    class="action-button text-indigo-600 hover:text-white hover:bg-indigo-600 p-2 rounded-md transition-all border border-indigo-300 hover:border-indigo-600"
+                                    title="O'qilgan deb belgilash"
+                                >
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            ` : ''}
+                            <button 
+                                onclick="confirmDelete('${message.id}')"
+                                class="action-button text-red-600 hover:text-white hover:bg-red-600 p-2 rounded-md transition-all border border-red-300 hover:border-red-600"
+                                title="Xabarni o'chirish"
+                            >
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+
+                messagesTableBody.appendChild(row);
+            });
+        }
+
+        function showMessageDetails(messageId) {
+            const message = messages.find(msg => msg.id === messageId);
+            if (!message) return;
+
+            modalContent.innerHTML = `
+                <div class="space-y-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Kimdan:</label>
+                            <p class="text-sm text-gray-900">${message.name}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email:</label>
+                            <p class="text-sm text-gray-900">
+                                <a href="mailto:${message.email}" class="text-blue-600 hover:underline">${message.email}</a>
+                            </p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Telefon:</label>
+                            <p class="text-sm text-gray-900">${message.phone || '-'}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Vaqti:</label>
+                            <p class="text-sm text-gray-900">${formatDate(message.timestamp)}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Holati:</label>
+                            <span class="px-2 py-1 text-xs font-semibold rounded-full ${
+                                message.status === "O'qilgan" 
+                                    ? 'bg-green-100 text-green-700' 
+                                    : 'bg-blue-100 text-blue-700'
+                            }">
+                                ${message.status}
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mavzu:</label>
+                        <p class="text-sm text-gray-900 bg-gray-50 p-3 rounded-md">
+                            ${message.subject || '(Mavzusiz)'}
+                        </p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Xabar matni:</label>
+                        <div class="bg-gray-50 p-4 rounded-md border">
+                            <p class="text-sm text-gray-900 whitespace-pre-wrap">
+                                ${message.message || '(Xabar matni yo\'q)'}
+                            </p>
+                        </div>
+                    </div>
+                    ${message.status === 'Yangi' ? `
+                        <div class="flex justify-end">
+                            <button 
+                                onclick="markAsRead('${message.id}'); closeMessageModal();"
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                            >
+                                <i class="fas fa-eye mr-2"></i>O'qilgan deb belgilash
+                            </button>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            messageModal.classList.remove('hidden');
+        }
+
+        function closeMessageModal() {
+            messageModal.classList.add('hidden');
+        }
+
+        function markAsRead(messageId) {
+            const messageIndex = messages.findIndex(msg => msg.id === messageId);
+            if (messageIndex !== -1) {
+                messages[messageIndex].status = "O'qilgan";
+                filterMessages();
+                showToast("Xabar o'qilgan deb belgilandi");
             }
         }
 
-        fetchAndDisplayMessages();
-    </script>
+        function confirmDelete(messageId) {
+            currentDeleteId = messageId;
+            deleteModal.classList.remove('hidden');
+        }
 
+        function deleteMessage() {
+            if (currentDeleteId) {
+                messages = messages.filter(msg => msg.id !== currentDeleteId);
+                filterMessages();
+                showToast("Xabar muvaffaqiyatli o'chirildi");
+                currentDeleteId = null;
+                deleteModal.classList.add('hidden');
+            }
+        }
+
+        function loadMessages() {
+            loadingDiv.classList.remove('hidden');
+            messagesContainer.classList.add('hidden');
+            noMessagesDiv.classList.add('hidden');
+
+            // Simulate loading delay
+            setTimeout(() => {
+                loadingDiv.classList.add('hidden');
+                filterMessages();
+            }, 500);
+        }
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('sidebar-collapsed');
+            const collapsedTitle = document.getElementById('sidebar-collapsed-title');
+            const sidebarTexts = document.querySelectorAll('.sidebar-text');
+            
+            if (sidebar.classList.contains('sidebar-collapsed')) {
+                collapsedTitle.classList.remove('hidden');
+                sidebarTexts.forEach(text => text.classList.add('hidden'));
+            } else {
+                collapsedTitle.classList.add('hidden');
+                sidebarTexts.forEach(text => text.classList.remove('hidden'));
+            }
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', filterMessages);
+        statusFilter.addEventListener('change', filterMessages);
+        refreshBtn.addEventListener('click', loadMessages);
+        sidebarToggle.addEventListener('click', toggleSidebar);
+
+        // Modal event listeners
+        document.getElementById('closeModal').addEventListener('click', closeMessageModal);
+        document.getElementById('cancelDelete').addEventListener('click', () => {
+            deleteModal.classList.add('hidden');
+            currentDeleteId = null;
+        });
+        document.getElementById('confirmDelete').addEventListener('click', deleteMessage);
+
+        // Close modals when clicking outside
+        messageModal.addEventListener('click', (e) => {
+            if (e.target === messageModal) closeMessageModal();
+        });
+        deleteModal.addEventListener('click', (e) => {
+            if (e.target === deleteModal) {
+                deleteModal.classList.add('hidden');
+                currentDeleteId = null;
+            }
+        });
+
+        // Initialize
+        loadMessages();
+    </script>
 </body>
 </html>

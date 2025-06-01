@@ -20,5 +20,21 @@
     "fullName": "asdasd",
     "role": "admin",
     "createdAt": "2025-05-27T08:26:23.553Z"
+  },
+  {
+    "id": "7fa3a356-71aa-4af6-adbb-9f67a45ddcda",
+    "username": "akbarnazarov109@gmail.com",
+    "password": "asdasdasd",
+    "fullName": "akbar nazarov",
+    "role": "admin",
+    "createdAt": "2025-05-28T10:06:14.499Z"
+  },
+  {
+    "id": "9ed72786-130e-403f-9c7e-373835704ed2",
+    "username": "ggg@gmail.com",
+    "password": "asdasdasd",
+    "fullName": "asdgg",
+    "role": "admin",
+    "createdAt": "2025-05-29T07:34:04.142Z"
   }
 ]
